@@ -1,5 +1,8 @@
 <?php
 
+use App\Constants\BackstageConstant;
+use App\Models\Models\Admin\Info;
+
 return [
 
     /*
@@ -36,6 +39,11 @@ return [
     */
 
     'guards' => [
+        BackstageConstant::GUARD => [
+            'driver' => 'sanctum',
+            'provider' => BackstageConstant::GUARD,
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -60,15 +68,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        BackstageConstant::GUARD => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => Info::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'database',
+            'table' => 'users',
+        ],
     ],
 
     /*
