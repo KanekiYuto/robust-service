@@ -9,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @author KanekiYuto
  */
-abstract class Cascade extends Migration
+abstract class Cascade
 {
 
     /**

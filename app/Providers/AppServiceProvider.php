@@ -7,7 +7,6 @@ use App\Models\Models\PersonalAccessToken;
 use App\Watchers\RequestWatcher;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
-use Kaneki\Diverse\Database\Schema\Builder;
 use Laravel\Sanctum\Sanctum;
 
 /**
@@ -41,8 +40,6 @@ class AppServiceProvider extends ServiceProvider
 
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         Ability::use();
-
-        $this->app->bind('diverse.db.schema', Builder::class);
     }
 
 }

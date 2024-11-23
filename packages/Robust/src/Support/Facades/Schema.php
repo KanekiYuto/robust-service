@@ -4,12 +4,28 @@ namespace KanekiYuto\Robust\Support\Facades;
 
 use Closure;
 use Illuminate\Support\Facades\Facade;
+use KanekiYuto\Robust\Cascades\Console\CascadeCommand;
+use KanekiYuto\Robust\Database\Schema\Builder;
 
 /**
- * @method static void create(string $table, Closure $callback, string $comment = '')
+ * Schema
+ *
+ * @method static void create(string $table, Closure $callback, bool $migration = false, string $comment = '')
+ * @method static void useCascadeCommand(CascadeCommand $command)
+ * @method static void dropIfExists(string $table)
+ *
+ * @see Builder
+ * @author KanekiTuto
  */
 class Schema extends Facade
 {
+
+    /**
+     * Facade Accessor
+     *
+     * @var string
+     */
+    const FACADE_ACCESSOR = 'diverse.db.schema';
 
     /**
      * 指示是否应缓存已解析的 Facade
@@ -25,7 +41,7 @@ class Schema extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'diverse.db.schema';
+        return self::FACADE_ACCESSOR;
     }
 
 }
