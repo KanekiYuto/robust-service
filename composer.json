@@ -29,7 +29,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Kaneki\\Diverse\\": "packages/Diverse/src/"
+            "Kaneki\\Diverse\\": "packages/Diverse/src/",
+            "KanekiYuto\\Robust\\": "packages/Robust/src/"
         }
     },
     "autoload-dev": {
