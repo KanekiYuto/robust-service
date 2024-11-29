@@ -1,9 +1,10 @@
 <?php
 
-namespace KanekiYuto\Robust\Cascades;
+namespace KanekiYuto\Handy\Cascades;
 
-use KanekiYuto\Robust\Cascades\Console\CascadeCommand;
-use KanekiYuto\Robust\Support\Facades\Schema;
+use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
+use KanekiYuto\Handy\Database\Schema\Builder;
+use KanekiYuto\Handy\Support\Facades\Schema;
 
 /**
  * 将所有信息都进行串连 [Cascade]
@@ -13,11 +14,16 @@ use KanekiYuto\Robust\Support\Facades\Schema;
 abstract class Cascade
 {
 
-    protected CascadeCommand $command;
-
+    /**
+     * 设置 Cascade Command
+     *
+     * @param CascadeCommand $command
+     *
+     * @return void
+     */
     public function setCascadeCommand(CascadeCommand $command): void
     {
-        $this->command = $command;
+        Builder::useCascadeCommand($command);
         Schema::useCascadeCommand($command);
     }
 
@@ -25,7 +31,7 @@ abstract class Cascade
      * 获取类名
      *
      * @return string
-    */
+     */
     public function getClassName(): string
     {
         return __CLASS__;

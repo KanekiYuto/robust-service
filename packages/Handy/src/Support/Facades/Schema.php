@@ -1,11 +1,11 @@
 <?php
 
-namespace KanekiYuto\Robust\Support\Facades;
+namespace KanekiYuto\Handy\Support\Facades;
 
 use Closure;
 use Illuminate\Support\Facades\Facade;
-use KanekiYuto\Robust\Cascades\Console\CascadeCommand;
-use KanekiYuto\Robust\Database\Schema\Builder;
+use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
+use KanekiYuto\Handy\Database\Schema\Builder;
 
 /**
  * Schema

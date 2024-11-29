@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace KanekiYuto\Handy;
 
+use Closure;
 use Illuminate\Support\ServiceProvider;
 use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
 use KanekiYuto\Handy\Database\Schema\Builder;
@@ -21,7 +22,7 @@ class RobustServiceProvider extends ServiceProvider
      * @var array
      */
     protected array $commands = [
-        'Cascade' => CascadeCommand::class
+        CascadeCommand::class,
     ];
 
     /**
@@ -40,27 +41,32 @@ class RobustServiceProvider extends ServiceProvider
      * 注册给定的命令
      *
      * @param array $commands
+     *
      * @return void
      */
     protected function registerCommands(array $commands): void
     {
-        foreach (array_keys($commands) as $command) {
-            $this->{"register{$command}Command"}();
+        foreach ($commands as $command) {
+            $this->app->singleton($command, $this->matchCommand($command));
         }
 
         $this->commands(array_values($commands));
     }
 
     /**
-     * 注册这个命令
+     * 匹配对应的命令函数
      *
-     * @return void
+     * @param string $className
+     *
+     * @return Closure
      */
-    protected function registerCascadeCommand(): void
+    protected function matchCommand(string $className): Closure
     {
-        $this->app->singleton(CascadeCommand::class, function ($app) {
-            return new CascadeCommand();
-        });
+        return match ($className) {
+            CascadeCommand::class => function () {
+                return new CascadeCommand();
+            }
+        };
     }
 
     /**
@@ -68,9 +74,9 @@ class RobustServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        // ...
     }
 
 }

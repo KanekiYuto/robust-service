@@ -1,14 +1,13 @@
 <?php
 
-namespace KanekiYuto\Robust\Cascades\Console;
+namespace KanekiYuto\Handy\Cascades\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use KanekiYuto\Robust\Cascades\Cascade;
-use KanekiYuto\Robust\Console\ConfirmableTrait;
+use KanekiYuto\Handy\Cascades\Cascade;
+use KanekiYuto\Handy\Console\ConfirmableTrait;
 use Symfony\Component\Console\Attribute\AsCommand;
 use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
 use function Laravel\Prompts\warning;
 
 #[AsCommand(name: 'robust:cascade')]
@@ -55,11 +54,11 @@ class CascadeCommand extends BaseCommand
         try {
             $cascade = $file->requireOnce($cascade);
         } catch (FileNotFoundException $e) {
-            warning('发生错误！'.$e->getMessage());
+            warning('发生错误！' . $e->getMessage());
             return 0;
         }
 
-        if (!is_object($cascade)){
+        if (!is_object($cascade)) {
             warning('该 [Cascade] 不可用！');
             return 0;
         }
@@ -69,7 +68,7 @@ class CascadeCommand extends BaseCommand
             return 0;
         }
 
-        if ($cascade->getClassName() !== Cascade::class){
+        if ($cascade->getClassName() !== Cascade::class) {
             warning('该 [Cascade] 不可用！');
             return 0;
         }

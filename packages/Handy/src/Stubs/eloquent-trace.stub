@@ -1,0 +1,21 @@
+<?php
+
+namespace App\EloquentTraces;
+
+use KanekiYuto\Robust\Trace\TraceEloquent;
+
+/**
+ * 追踪类 （帮助 IDE 更好地发现）
+ *
+ * @author KanekiYuto
+ */
+class {{ className }} extends TraceEloquent
+{
+
+    {{ tableConstantCode }}
+
+    {{ attributeConstantCode }}
+
+    {{ hideConstantCode }}
+
+}

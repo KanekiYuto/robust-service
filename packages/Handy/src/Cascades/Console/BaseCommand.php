@@ -1,6 +1,6 @@
 <?php
 
-namespace KanekiYuto\Robust\Cascades\Console;
+namespace KanekiYuto\Handy\Cascades\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;

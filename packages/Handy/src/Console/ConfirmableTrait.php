@@ -1,6 +1,6 @@
 <?php
 
-namespace KanekiYuto\Robust\Console;
+namespace KanekiYuto\Handy\Console;
 
 use Closure;
 use function Laravel\Prompts\confirm;

@@ -5,7 +5,7 @@ namespace App\Models\Traces\Admin;
 use Kaneki\Diverse\Trace\TraceEloquent;
 
 /**
- * 追踪类 （帮助 IDE 更好的发现）
+ * 追踪类 （帮助 IDE 更好地发现）
  *
  * @author KanekiYuto
  */

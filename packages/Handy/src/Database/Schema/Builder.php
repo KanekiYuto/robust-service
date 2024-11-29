@@ -1,12 +1,12 @@
 <?php
 
-namespace KanekiYuto\Robust\Database\Schema;
+namespace KanekiYuto\Handy\Database\Schema;
 
 use Closure;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema as LaravelSchema;
 use Illuminate\Support\Facades\Storage;
-use KanekiYuto\Robust\Cascades\Console\CascadeCommand;
+use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
 
 /**
  * 构建 - [Builder]
@@ -37,6 +37,11 @@ class Builder
      */
     private static string $comment;
 
+    /**
+     * Cascade 命令行
+     *
+     * @var CascadeCommand
+     */
     private static CascadeCommand $command;
 
     /**
@@ -57,19 +62,43 @@ class Builder
 
         $blueprint = new Blueprint(self::$table, self::$comment);
         $callback($blueprint);
+
+        (new EloquentTrace($blueprint))->create();
+        (new Migration($blueprint))->create();
     }
 
     /**
      * 使用文件驱动
      *
+     * @param string $root
      * @return Filesystem
      */
-    public static function useDisk(): Filesystem
+    public static function useDisk(string $root): Filesystem
     {
         return Storage::build([
             'driver' => 'local',
-            'root' => self::getMigrationPath(),
+            'root' => $root,
         ]);
+    }
+
+    /**
+     * 获取存根目录
+     *
+     * @return string
+     */
+    public static function getStubsPath(): string
+    {
+        return self::getRobustPath() . DIRECTORY_SEPARATOR . 'Stubs';
+    }
+
+    /**
+     * 获取包的根路径
+     *
+     * @return string
+     */
+    public static function getRobustPath(): string
+    {
+        return dirname(__DIR__, 2);
     }
 
     /**
@@ -81,6 +110,30 @@ class Builder
     {
         $databasePath = self::$command->getLaravel()->databasePath();
         return $databasePath . DIRECTORY_SEPARATOR . 'migrations';
+    }
+
+    /**
+     * 获取 [ORM] 模型跟踪路径
+     *
+     * @return string
+     */
+    public static function getEloquentTracePath(): string
+    {
+        $appPath = self::getAppPath();
+
+        return $appPath . DIRECTORY_SEPARATOR . 'EloquentTraces';
+    }
+
+    /**
+     * 获取应用路径
+     *
+     * @return string
+     */
+    public static function getAppPath(): string
+    {
+        $basePath = self::$command->getLaravel()->basePath();
+
+        return $basePath . DIRECTORY_SEPARATOR . 'app';
     }
 
     /**
@@ -107,6 +160,11 @@ class Builder
         if (self::$migration) {
             LaravelSchema::dropIfExists($table);
         }
+    }
+
+    public function useCode()
+    {
+
     }
 
 }
