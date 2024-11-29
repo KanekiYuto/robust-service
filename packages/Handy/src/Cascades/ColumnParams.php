@@ -1,6 +1,6 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema;
+namespace KanekiYuto\Handy\Cascades;
 
 use Closure;
 use stdClass;

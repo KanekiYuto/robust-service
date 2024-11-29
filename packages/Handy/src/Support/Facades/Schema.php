@@ -4,24 +4,22 @@ namespace KanekiYuto\Handy\Support\Facades;
 
 use Closure;
 use Illuminate\Support\Facades\Facade;
-use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
-use KanekiYuto\Handy\Database\Schema\Builder;
 
 /**
  * Schema
  *
  * @method static void create(string $table, Closure $callback, bool $migration = false, string $comment = '')
- * @method static void useCascadeCommand(CascadeCommand $command)
  * @method static void dropIfExists(string $table)
  *
- * @see Builder
+ * @see \KanekiYuto\Handy\Cascades\Builder
+ *
  * @author KanekiTuto
  */
 class Schema extends Facade
 {
 
     /**
-     * Facade Accessor
+     * Facade 访问名称
      *
      * @var string
      */

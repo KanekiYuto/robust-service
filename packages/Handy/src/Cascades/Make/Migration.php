@@ -1,9 +1,13 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema;
+namespace KanekiYuto\Handy\Cascades\Make;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use KanekiYuto\Handy\Cascades\Blueprint;
+use KanekiYuto\Handy\Cascades\Builder;
+use KanekiYuto\Handy\Cascades\ColumnParams;
+use KanekiYuto\Handy\Cascades\MigrationParams;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\note;
@@ -27,9 +31,10 @@ class Migration
     /**
      * 存根
      *
-     * @var string
+     * @var string|null
+     *
      */
-    private string $stub;
+    private string|null $stub;
 
     /**
      * 创建一个新构建实例

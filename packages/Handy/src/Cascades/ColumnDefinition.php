@@ -1,9 +1,9 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema;
+namespace KanekiYuto\Handy\Cascades;
 
 use Closure;
-use KanekiYuto\Handy\Database\Schema\Constants\DefaultColumnParams;
+use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
 
 /**
  * 列定义

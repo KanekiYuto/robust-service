@@ -1,9 +1,11 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema;
+namespace KanekiYuto\Handy\Cascades\Make;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use KanekiYuto\Handy\Cascades\Blueprint;
+use KanekiYuto\Handy\Cascades\Builder;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\note;
@@ -27,16 +29,23 @@ class EloquentTrace
     /**
      * 存根
      *
-     * @var string
+     * @var string|null
      */
-    private string $stub;
+    private string|null $stub;
 
     /**
-     * 隐藏的字段
+     * 隐藏的列
      *
      * @var array
      */
-    private array $hides = [];
+    private array $hidden = [];
+
+    /**
+     * 可填充的列
+     *
+     * @var array
+    */
+    private array $fillable = [];
 
     /**
      * 创建一个新构建实例
@@ -70,7 +79,8 @@ class EloquentTrace
         $this->className();
         $this->tableConstantCode();
         $this->attributeConstantCode();
-        $this->hideConstantCode();
+        $this->hiddenConstantCode();
+        $this->fillableConstantCode();
 
         $className = $this->getClassName($this->blueprint->getTable());
         $tracePath = Builder::getEloquentTracePath();
@@ -206,9 +216,11 @@ class EloquentTrace
 
             $template = implode("\n\t", $template);
 
+            $this->fillable[] = $constantCode;
+
             // 判断该列是否标记为隐藏
             if ($columnDefinition->isHide()) {
-                $this->hides[] = $constantCode;
+                $this->hidden[] = $constantCode;
             }
 
             $templates[] = $template;
@@ -225,9 +237,9 @@ class EloquentTrace
      *
      * @return void
      */
-    private function hideConstantCode(): void
+    private function hiddenConstantCode(): void
     {
-        $hides = collect($this->hides)->map(function (string $hide) {
+        $hides = collect($this->hidden)->map(function (string $hide) {
             $hide = Str::of($hide)->upper();
             return "self::$hide";
         })->all();
@@ -240,10 +252,39 @@ class EloquentTrace
             $this->codeComment('隐藏列', '', 'array')
         );
 
-        $templates[] = "const HIDE = [$hides];";
+        $templates[] = "const HIDDEN = [$hides];";
 
         $this->stub = $this->replace(
             '{{ hideConstantCode }}',
+            implode("\n\t", $templates)
+        );
+
+    }
+
+    /**
+     * 隐藏属性从常量代码
+     *
+     * @return void
+     */
+    private function fillableConstantCode(): void
+    {
+        $hides = collect($this->fillable)->map(function (string $hide) {
+            $hide = Str::of($hide)->upper();
+            return "self::$hide";
+        })->all();
+
+        $hides = implode(', ', $hides);
+
+        $templates = [];
+        $templates = array_merge(
+            $templates,
+            $this->codeComment('隐藏列', '', 'array')
+        );
+
+        $templates[] = "const FILLABLE = [$hides];";
+
+        $this->stub = $this->replace(
+            '{{ fillableConstantCode }}',
             implode("\n\t", $templates)
         );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema\Constants;
+namespace KanekiYuto\Handy\Cascades\Constants;
 
 /**
  * 列类型常量

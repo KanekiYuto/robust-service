@@ -10,7 +10,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\warning;
 
-#[AsCommand(name: 'robust:cascade')]
+#[AsCommand(name: 'handy:cascade')]
 class CascadeCommand extends BaseCommand
 {
 
@@ -21,7 +21,7 @@ class CascadeCommand extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'robust:cascade';
+    protected $signature = 'handy:cascade';
 
     /**
      * 命令说明
@@ -78,7 +78,8 @@ class CascadeCommand extends BaseCommand
             return 0;
         }
 
-        $cascade->setCascadeCommand($this);
+        info('开始执行...');
+
         $cascade->migration();
     }
 

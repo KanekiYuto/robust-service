@@ -1,11 +1,10 @@
 <?php
 
-use KanekiYuto\Handy\RobustServiceProvider;
+use KanekiYuto\Handy\HandyServiceProvider;
 
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\PreacherServiceProvider::class,
-    App\Providers\RobustServiceProvider::class,
     App\Providers\TelescopeServiceProvider::class,
-    RobustServiceProvider::class,
+    HandyServiceProvider::class,
 ];

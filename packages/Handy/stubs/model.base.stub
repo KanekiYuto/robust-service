@@ -1,0 +1,61 @@
+<?php
+
+namespace {{ namespace }};
+
+use KanekiYuto\Handy\Cascades\Model\BaseModel as Model;
+
+{{ usePackage }}
+
+/**
+ * {{ comment }}
+ *
+ * @author KanekiYuto
+*/
+class {{ class }} extends Model
+{
+
+    use {{ use_trait }};
+
+    /**
+     * 模型表名称
+     *
+     * @var string
+     */
+    protected $table = {{ table }};
+
+    /**
+     * 模型主键 ID
+     *
+     * @var string
+     */
+    protected $primaryKey = {{ primaryKey }};
+
+    /**
+     * 主键是否自增
+     *
+     * @var bool
+     */
+    public $incrementing = {{ incrementing }};
+
+    /**
+     * 指示模型是否主动维护时间戳
+     *
+     * @var bool
+     */
+    public $timestamps = {{ timestamps }};
+
+    /**
+     * 需要被隐藏的列属性
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = {{ hidden }}
+
+    /**
+     * 可大量分配的属性
+     *
+     * @var array<string>
+     */
+    protected $fillable = {{ fillable }};
+
+}

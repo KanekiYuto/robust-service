@@ -1,9 +1,9 @@
 <?php
 
-namespace KanekiYuto\Handy\Database\Schema;
+namespace KanekiYuto\Handy\Cascades;
 
-use KanekiYuto\Handy\Database\Schema\Constants\ColumnTypeConstant;
-use KanekiYuto\Handy\Database\Schema\Constants\DefaultColumnParams;
+use KanekiYuto\Handy\Cascades\Constants\ColumnTypeConstant;
+use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
 
 /**
  * 蓝图 - [Blueprint]
@@ -69,11 +69,11 @@ class Blueprint
     {
         $params = (object)['column' => $field];
 
-        if ($autoIncrement !== DefaultColumnParams::AUTO_INCREMENT){
+        if ($autoIncrement !== DefaultColumnParams::AUTO_INCREMENT) {
             $params->autoIncrement = $autoIncrement;
         }
 
-        if ($unsigned !== DefaultColumnParams::UNSIGNED){
+        if ($unsigned !== DefaultColumnParams::UNSIGNED) {
             $params->unsigned = $autoIncrement;
         }
 
@@ -102,7 +102,7 @@ class Blueprint
     {
         $params = (object)['column' => $field];
 
-        if ($length !== DefaultColumnParams::PRIMARY){
+        if ($length !== DefaultColumnParams::PRIMARY) {
             $params->length = $length;
         }
 
@@ -114,26 +114,6 @@ class Blueprint
         $this->columns[] = $column;
 
         return $column;
-    }
-
-    /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param string $field
-     */
-    public function ipAddress(string $field)
-    {
-
-    }
-
-    /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param string $field
-     */
-    public function json(string $field)
-    {
-
     }
 
     /**

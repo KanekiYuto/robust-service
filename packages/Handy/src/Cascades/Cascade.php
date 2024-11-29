@@ -3,29 +3,17 @@
 namespace KanekiYuto\Handy\Cascades;
 
 use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
-use KanekiYuto\Handy\Database\Schema\Builder;
 use KanekiYuto\Handy\Support\Facades\Schema;
 
 /**
  * 将所有信息都进行串连 [Cascade]
  *
+ * @todo 需要检查重新构建
+ *
  * @author KanekiYuto
  */
 abstract class Cascade
 {
-
-    /**
-     * 设置 Cascade Command
-     *
-     * @param CascadeCommand $command
-     *
-     * @return void
-     */
-    public function setCascadeCommand(CascadeCommand $command): void
-    {
-        Builder::useCascadeCommand($command);
-        Schema::useCascadeCommand($command);
-    }
 
     /**
      * 获取类名
