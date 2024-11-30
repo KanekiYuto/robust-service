@@ -5,8 +5,11 @@ namespace KanekiYuto\Handy\Cascades;
 use Closure;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
-use KanekiYuto\Handy\Cascades\Make\EloquentTrace;
-use KanekiYuto\Handy\Cascades\Make\Migration;
+use Illuminate\Support\Str;
+use KanekiYuto\Handy\Cascades\Constants\CascadeConst;
+use KanekiYuto\Handy\Cascades\Make\EloquentTraceMake;
+use KanekiYuto\Handy\Cascades\Make\MigrationMake;
+use KanekiYuto\Handy\Cascades\Make\ModelMake;
 
 /**
  * 构建 - [Builder]
@@ -52,8 +55,10 @@ class Builder
 
         $callback($blueprint);
 
-        (new Migration($blueprint))->create();
-        (new EloquentTrace($blueprint))->create();
+        // 引导构建
+        (new EloquentTraceMake($blueprint))->boot();
+        (new MigrationMake($blueprint))->boot();
+        (new ModelMake($blueprint))->boot();
     }
 
     /**
@@ -103,18 +108,6 @@ class Builder
     }
 
     /**
-     * 获取 [ORM] 模型跟踪路径
-     *
-     * @return string
-     */
-    public static function getEloquentTracePath(): string
-    {
-        $appPath = self::getAppPath();
-
-        return $appPath . DIRECTORY_SEPARATOR . 'EloquentTraces';
-    }
-
-    /**
      * 获取应用路径
      *
      * @return string
@@ -122,8 +115,23 @@ class Builder
     public static function getAppPath(): string
     {
         $basePath = base_path();
+        $basePath .= DIRECTORY_SEPARATOR;
 
-        return $basePath . DIRECTORY_SEPARATOR . 'app';
+        return $basePath . CascadeConst::APP_NAMESPACE_PATH;
+    }
+
+    /**
+     * 命名空间转换文件路径
+     *
+     * @param string $namespace
+     *
+     * @return string
+     */
+    public static function namespaceCoverFilePath(string $namespace): string
+    {
+        return Str::of($namespace)
+            ->replace('\\', DIRECTORY_SEPARATOR)
+            ->toString();
     }
 
 }

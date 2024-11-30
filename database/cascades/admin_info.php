@@ -16,18 +16,21 @@ use KanekiYuto\Handy\Support\Facades\Schema;
 return new class extends Cascade {
 
     /**
-     * 串连 - [migration]
+     * Run Cascade
      *
      * @return void
      */
-    public function migration(): void
+    public function run(): void
     {
-        Schema::create(table: 'admin_info', callback: function (Blueprint $blueprint) {
-            $blueprint->bigInteger('id')->primary()->comment('主键');
-            $blueprint->string('account', 32)->hide()->comment('账号');
-            $blueprint->string('test')->hide()->cast(function () {
-                return ['test' => 'json'];
-            });
+        Schema::create(table: 'admin_info', callback: function (Blueprint $table) {
+            $table->bigInteger('id')->primary()->unique()->comment('管理员ID');
+            $table->string('account', 32)->comment('账号');
+            $table->bigInteger('admin_role_id')->index()->comment('角色ID');
+            $table->string('email', 32)->comment('邮箱');
+            $table->string('pass', 512)->comment('密码');
+            $table->bigInteger('created_at')->comment('创建时间');
+            $table->bigInteger('updated_at')->comment('修改时间');
+            $table->string('test')->charset('111')->after('id')->change();
         }, comment: '管理员信息表');
     }
 

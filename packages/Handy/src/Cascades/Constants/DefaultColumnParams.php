@@ -60,4 +60,6 @@ class DefaultColumnParams
     */
     const PRIMARY = true;
 
+    const UNIQUE = null;
+
 }

@@ -1,9 +1,9 @@
 <?php
 
+use {{ traceEloquent }} as TheTrace;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\EloquentTraces\{{ trace }} as TheTrace;
 
 /**
  * Database Migration [{{ comment }}]
@@ -19,7 +19,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create({{ table }}, function (Blueprint $table) {
+        Schema::create(TheTrace::TABLE, function (Blueprint $table) {
             {{ blueprint }}
         });
     }
@@ -31,7 +31,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists({{ table }});
+        Schema::dropIfExists(TheTrace::TABLE);
     }
 
 };

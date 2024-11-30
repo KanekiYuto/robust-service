@@ -2,8 +2,10 @@
 
 namespace KanekiYuto\Handy\Cascades;
 
-use KanekiYuto\Handy\Cascades\Constants\ColumnTypeConstant;
-use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
+use KanekiYuto\Handy\Cascades\Trait\Laravel\Blueprint as LaravelBlueprint;
+use KanekiYuto\Handy\Cascades\Trait\Laravel\Integer as LaravelBlueprintInteger;
+use KanekiYuto\Handy\Cascades\Trait\Laravel\OnlyUseColumn as LaravelBlueprintOnlyUseColumn;
+use KanekiYuto\Handy\Cascades\Trait\Laravel\Time as LaravelBlueprintTime;
 
 /**
  * 蓝图 - [Blueprint]
@@ -12,10 +14,18 @@ use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
  *
  * 然后再为其进行其他参数的构建，同时尽可能保证与原有方法使用一致
  *
+ * @todo 暂且不支持的方法 [foreignIdFor | morphs | ulidMorphs | uuidMorphs | nullableTimestamps | nullableUlidMorphs]
+ * @todo 暂且不支持的方法 [nullableUuidMorphs | rememberToken]
+ *
  * @author KanekiTuto
  */
 class Blueprint
 {
+
+    use LaravelBlueprint,
+        LaravelBlueprintOnlyUseColumn,
+        LaravelBlueprintInteger,
+        LaravelBlueprintTime;
 
     /**
      * 表名称
@@ -53,70 +63,6 @@ class Blueprint
     }
 
     /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param string $field
-     * @param bool $autoIncrement
-     * @param bool $unsigned
-     *
-     * @return ColumnDefinition
-     */
-    public function bigInteger(
-        string $field,
-        bool   $autoIncrement = DefaultColumnParams::AUTO_INCREMENT,
-        bool   $unsigned = DefaultColumnParams::UNSIGNED
-    ): ColumnDefinition
-    {
-        $params = (object)['column' => $field];
-
-        if ($autoIncrement !== DefaultColumnParams::AUTO_INCREMENT) {
-            $params->autoIncrement = $autoIncrement;
-        }
-
-        if ($unsigned !== DefaultColumnParams::UNSIGNED) {
-            $params->unsigned = $autoIncrement;
-        }
-
-        $column = new ColumnDefinition(
-            (new ColumnParams($field))
-                ->setMigrationParam(ColumnTypeConstant::STRING, $params)
-        );
-
-        $this->columns[] = $column;
-
-        return $column;
-    }
-
-    /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param string $field
-     * @param int|null $length
-     *
-     * @return ColumnDefinition
-     */
-    public function string(
-        string   $field,
-        int|null $length = DefaultColumnParams::LENGTH
-    ): ColumnDefinition
-    {
-        $params = (object)['column' => $field];
-
-        if ($length !== DefaultColumnParams::PRIMARY) {
-            $params->length = $length;
-        }
-
-        $column = new ColumnDefinition(
-            (new ColumnParams($field))
-                ->setMigrationParam(ColumnTypeConstant::STRING, $params)
-        );
-
-        $this->columns[] = $column;
-
-        return $column;
-    }
-
-    /**
      * 获取所有列信息
      *
      * @return array
@@ -144,6 +90,20 @@ class Blueprint
     public function getComment(): string
     {
         return $this->comment;
+    }
+
+    /**
+     * 将列定义加入到数组中
+     *
+     * @param ColumnDefinition $columnDefinition
+     *
+     * @return ColumnDefinition
+     */
+    protected function addColumn(ColumnDefinition $columnDefinition): ColumnDefinition
+    {
+        $this->columns[] = $columnDefinition;
+
+        return $columnDefinition;
     }
 
 }

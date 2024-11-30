@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EloquentTraces;
+namespace {{ namespace }};
 
 use KanekiYuto\Handy\Trace\TraceEloquent;
 
@@ -9,15 +9,37 @@ use KanekiYuto\Handy\Trace\TraceEloquent;
  *
  * @author KanekiYuto
  */
-class {{ className }} extends TraceEloquent
+class {{ class }} extends TraceEloquent
 {
 
-    {{ tableConstantCode }}
+    /**
+     * 表名称
+     *
+     * @var string
+     */
+	const TABLE = '{{ table }}';
 
-    {{ attributeConstantCode }}
+    /**
+     * 主键
+     *
+     * @var string
+     */
+	const PRIMARY_KEY = {{ primaryKey }};
 
-    {{ hideConstantCode }}
+    {{ columns }}
 
-    {{ fillableConstantCode }}
+    /**
+     * 隐藏列
+     *
+     * @var array<int, string>
+     */
+    const HIDDEN = [{{ hidden }}];
+
+    /**
+     * 可填充的列
+     *
+     * @var array<string>
+     */
+    const FILLABLE = [{{ fillable }}];
 
 }

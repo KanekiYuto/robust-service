@@ -58,29 +58,14 @@ class CascadeCommand extends BaseCommand
             return 0;
         }
 
-        if (!is_object($cascade)) {
-            warning('该 [Cascade] 不可用！');
-            return 0;
-        }
-
-        if (!method_exists($cascade, 'getClassName')) {
-            warning('该 [Cascade] 不可用！');
-            return 0;
-        }
-
-        if ($cascade->getClassName() !== Cascade::class) {
-            warning('该 [Cascade] 不可用！');
-            return 0;
-        }
-
-        if (!method_exists($cascade, 'migration')) {
-            warning('该 [Cascade] 不可用！');
+        if (!($cascade instanceof Cascade)){
+            warning('该 [Cascade1] 不可用！');
             return 0;
         }
 
         info('开始执行...');
 
-        $cascade->migration();
+        $cascade->run();
     }
 
 }

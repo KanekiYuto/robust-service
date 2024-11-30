@@ -2,9 +2,6 @@
 
 namespace KanekiYuto\Handy\Cascades;
 
-use KanekiYuto\Handy\Cascades\Console\CascadeCommand;
-use KanekiYuto\Handy\Support\Facades\Schema;
-
 /**
  * 将所有信息都进行串连 [Cascade]
  *
@@ -12,27 +9,9 @@ use KanekiYuto\Handy\Support\Facades\Schema;
  *
  * @author KanekiYuto
  */
-abstract class Cascade
+abstract class Cascade implements Contracts\Cascade
 {
 
-    /**
-     * 获取类名
-     *
-     * @return string
-     */
-    public function getClassName(): string
-    {
-        return __CLASS__;
-    }
-
-    /**
-     * 串连 - [migration]
-     *
-     * @return void
-     */
-    protected function migration(): void
-    {
-        // ...
-    }
+    // Do it...
 
 }

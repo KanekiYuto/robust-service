@@ -3,7 +3,7 @@
 namespace KanekiYuto\Handy\Cascades;
 
 use Closure;
-use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
+use KanekiYuto\Handy\Cascades\Trait\LaravelColumnDefinition;
 
 /**
  * 列定义
@@ -12,6 +12,8 @@ use KanekiYuto\Handy\Cascades\Constants\DefaultColumnParams;
  */
 class ColumnDefinition
 {
+
+    use LaravelColumnDefinition;
 
     /**
      * 列参数
@@ -43,72 +45,13 @@ class ColumnDefinition
     }
 
     /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function nullable(bool $value = DefaultColumnParams::NULLABLE): self
-    {
-        $params = (object)[];
-
-        if ($value !== DefaultColumnParams::NULLABLE) {
-            $params->value = $value;
-        }
-
-        $this->columnParams->setMigrationParam('nullable', $params);
-
-        return $this;
-    }
-
-
-    /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param string $comment
-     *
-     * @return self
-     */
-    public function comment(string $comment): self
-    {
-        $this->columnParams->setComment($comment);
-
-        $this->columnParams->setMigrationParam('comment', (object)[
-            'comment' => $comment
-        ]);
-
-        return $this;
-    }
-
-    /**
-     * 与 Laravel Blueprint 保持一致
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function primary(bool $value = DefaultColumnParams::PRIMARY): self
-    {
-        $params = (object)[];
-
-        if ($value !== DefaultColumnParams::PRIMARY) {
-            $params->value = $value;
-        }
-
-        $this->columnParams->setMigrationParam('primary', $params);
-
-        return $this;
-    }
-
-    /**
      * 标记为隐藏列
      *
      * @param bool $value
      *
      * @return self
      */
-    public function hide(bool $value = DefaultColumnParams::HIDE): self
+    public function hidden(bool $value = true): self
     {
         $this->columnParams->setHide($value);
 
