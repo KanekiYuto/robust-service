@@ -3,23 +3,21 @@
 namespace KanekiYuto\Handy\Cascades\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use KanekiYuto\Handy\Trace\TraceEloquent;
 
 /**
  * 基础模型
  *
  * @author KanekiYuto
  */
-class BaseModel extends Model
+abstract class BaseModel extends Model
 {
 
-    /**
-     * 应该强制转换的属性
-     *
-     * @return array
-     */
-    public function casts(): array
-    {
-        return [];
-    }
+	/**
+	 * 追踪类
+	 *
+	 * @var string
+	 */
+	protected string $trace = TraceEloquent::class;
 
 }

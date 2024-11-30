@@ -2,21 +2,14 @@
 
 namespace App\Models\Admin;
 
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
-use KanekiYuto\Diverse\Support\Timestamp;
-use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
-use App\Cascade\Trace\Eloquent\Admin\RoleTrace as RoleTrace;
-use App\Cascade\Models\Admin\RoleModel as AdminRole;
+use App\Models\AuthenticateModel as Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticate;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Cascade\Models\Admin\RoleModel as AdminRole;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as RoleTrace;
 
-class Info extends Authenticate
+class Info extends Model
 {
-
-	use HasApiTokens, HasFactory, Notifiable;
 
 	public function casts(): array
 	{
@@ -48,20 +41,18 @@ class Info extends Authenticate
 	 */
 	protected function performInsert(Builder $query): bool
 	{
-		$this->setAttribute(TheTrace::ID, Timestamp::millisecond());
-		$this->setAttribute(TheTrace::CREATED_AT, Timestamp::second());
-		$this->setAttribute(TheTrace::UPDATED_AT, Timestamp::second());
+		$trace = $this->trace;
 
-		$account = $this->getAttribute(TheTrace::ACCOUNT);
-		$email = $this->getAttribute(TheTrace::EMAIL);
+		$account = $this->getAttribute($trace::ACCOUNT);
+		$email = $this->getAttribute($trace::EMAIL);
 
 		// @todo 缩写成一条查询
 		$account = $this->newQuery()
-			->where(TheTrace::ACCOUNT, $account)
+			->where($trace::ACCOUNT, $account)
 			->exists();
 
 		$email = $this->newQuery()
-			->where(TheTrace::EMAIL, $email)
+			->where($trace::EMAIL, $email)
 			->exists();
 
 		// 账号与邮箱唯一性保证
@@ -70,21 +61,6 @@ class Info extends Authenticate
 		}
 
 		return parent::performInsert($query);
-	}
-
-	/**
-	 * 执行一个模型更新操作
-	 *
-	 * @param  Builder  $query
-	 *
-	 * @return bool
-	 */
-	protected function performUpdate(Builder $query): bool
-	{
-		// 维护时间戳
-		$this->setAttribute(TheTrace::UPDATED_AT, Timestamp::second());
-
-		return parent::performUpdate($query);
 	}
 
 }

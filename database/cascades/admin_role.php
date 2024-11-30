@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Log as Model;
+use App\Models\BaseModel as Model;
 use KanekiYuto\Handy\Cascades\Cascade;
 use KanekiYuto\Handy\Cascades\Blueprint;
 use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;

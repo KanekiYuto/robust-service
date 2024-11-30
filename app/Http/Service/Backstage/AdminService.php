@@ -111,7 +111,7 @@ class AdminService
             BackstageConstant::TOKEN_VALIDITY
         );
 
-        // 获取所有拥有的能力
+		// 获取所有拥有的能力
         $roleInfo = $user->role;
         $abilityColumn = AdminRoleTrace::ABILITIES;
         $abilities = Ability::permission($roleInfo->$abilityColumn);

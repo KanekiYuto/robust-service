@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-//use App\Cascade\Models\Admin\InfoModel as AdminInfo;
-//use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace AS TheTrace;
 

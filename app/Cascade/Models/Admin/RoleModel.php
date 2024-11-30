@@ -2,8 +2,9 @@
 
 namespace App\Cascade\Models\Admin;
 
-use App\Models\Admin\Log as Model;
+use App\Models\BaseModel as Model;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
+use Illuminate\Database\Eloquent\Builder;
 
 use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;
 
@@ -14,6 +15,13 @@ use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;
 */
 class RoleModel extends Model
 {
+
+    /**
+     * 追踪类
+     *
+     * @var string
+     */
+    protected string $trace = TheTrace::class;
 
     /**
      * 模型表名称
@@ -69,6 +77,30 @@ class RoleModel extends Model
 			TheTrace::CREATED_AT => AutoTimezone::class,
 			TheTrace::UPDATED_AT => AutoTimezone::class,
 		]);
+    }
+
+    /**
+     * 创建前执行的操作
+     *
+     * @param  Builder  $query
+     *
+     * @return bool
+     */
+    protected function performInsert(Builder $query): bool
+    {
+        return parent::performInsert($query);
+    }
+
+    /**
+     * 执行一个模型更新操作
+     *
+     * @param  Builder  $query
+     *
+     * @return bool
+     */
+    protected function performUpdate(Builder $query): bool
+    {
+        return parent::performUpdate($query);
     }
 
 }

@@ -22,7 +22,7 @@ abstract class TraceEloquent
         $constants = self::getConstants();
 
         return array_filter($constants, function (string $key) {
-            return !in_array($key, ['TABLE', 'HIDE']);
+            return !in_array($key, ['TABLE', 'HIDDEN']);
         }, ARRAY_FILTER_USE_KEY);
     }
 
