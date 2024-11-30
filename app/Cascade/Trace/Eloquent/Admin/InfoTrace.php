@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Trace\Eloquent\Admin;
+namespace App\Cascade\Trace\Eloquent\Admin;
 
 use KanekiYuto\Handy\Trace\TraceEloquent;
 
@@ -75,13 +75,6 @@ class InfoTrace extends TraceEloquent
 	 */
 	const UPDATED_AT = 'updated_at';
 	
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	const TEST = 'test';
-	
 
     /**
      * 隐藏列
@@ -95,6 +88,6 @@ class InfoTrace extends TraceEloquent
      *
      * @var array<string>
      */
-    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::PASS, self::CREATED_AT, self::UPDATED_AT, self::TEST];
+    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::PASS, self::CREATED_AT, self::UPDATED_AT];
 
 }
