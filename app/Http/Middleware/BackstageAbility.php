@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Ability\Ability;
-use App\Models\Traces\Admin\Role as TheTrace;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 use KanekiYuto\Diverse\Preacher\Preacher;
 use Closure;
 use Illuminate\Http\Request;

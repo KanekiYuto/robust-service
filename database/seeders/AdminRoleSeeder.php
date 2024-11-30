@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Ability\Ability;
-use App\Models\Models\Admin\Role as AdminRole;
-use App\Models\Traces\Admin\Role as TheTrace;
+use App\Cascade\Models\Admin\RoleModel as AdminRole;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 use KanekiYuto\Diverse\Support\Timestamp;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;

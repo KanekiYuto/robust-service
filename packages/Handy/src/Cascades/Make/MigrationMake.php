@@ -42,6 +42,7 @@ class MigrationMake extends Make
 
         // Do it...
         $this->param('traceEloquent', $this->getPackage($table, [
+			CascadeConst::CASCADE_NAMESPACE,
             CascadeConst::TRACE_NAMESPACE,
             CascadeConst::TRACE_ELOQUENT_NAMESPACE
         ], CascadeConst::TRACE_NAMESPACE));

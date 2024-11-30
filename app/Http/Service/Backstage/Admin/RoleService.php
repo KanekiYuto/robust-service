@@ -2,8 +2,8 @@
 
 namespace App\Http\Service\Backstage\Admin;
 
-use App\Models\Models\Admin\Role as AdminRole;
-use App\Models\Traces\Admin\Role as TheTrace;
+use App\Cascade\Models\Admin\RoleModel as AdminRole;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 use Kaneki\Diverse\Equation\Equation;
 use Kaneki\Diverse\Equation\Formulas;
 use Kaneki\Diverse\PagingQuery\PagingQuery;

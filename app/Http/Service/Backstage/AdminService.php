@@ -7,7 +7,7 @@ use App\Constants\BackstageConstant;
 use App\Helpers\TokenHelpers;
 use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace as AdminInfoTrace;
-use App\Models\Traces\Admin\Role as AdminRoleTrace;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as AdminRoleTrace;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;

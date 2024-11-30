@@ -65,6 +65,9 @@ class LogModel extends Model
     public function casts(): array
     {
         return array_merge(parent::casts(), [
+			TheTrace::PAYLOAD => 'json',
+			TheTrace::HEADERS => 'json',
+			TheTrace::RESPONSE => 'json',
 			TheTrace::CREATED_AT => AutoTimezone::class,
 			TheTrace::UPDATED_AT => AutoTimezone::class,
 		]);

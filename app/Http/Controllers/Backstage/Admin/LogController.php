@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backstage\Admin;
 
 use App\Http\Service\Backstage\Admin\LogService;
-use App\Models\Traces\Admin\Log as TheTrace;
+use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;

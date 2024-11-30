@@ -2,7 +2,7 @@
 
 namespace App\Http\Service\Backstage\Admin;
 
-use App\Models\Models\Admin\Log as AdminLog;
+use App\Cascade\Models\Admin\LogModel as AdminLog;
 use Kaneki\Diverse\Equation\Equation;
 use Kaneki\Diverse\Equation\Formulas;
 use Kaneki\Diverse\PagingQuery\PagingQuery;

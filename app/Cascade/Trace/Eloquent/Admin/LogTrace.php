@@ -48,6 +48,13 @@ class LogTrace extends TraceEloquent
 	const API = 'api';
 	
 	/**
+	 * 请求IP
+	 *
+	 * @var string
+	 */
+	const IPADDRESS = 'ipaddress';
+	
+	/**
 	 * 请求荷载
 	 *
 	 * @var string
@@ -67,13 +74,6 @@ class LogTrace extends TraceEloquent
 	 * @var string
 	 */
 	const RESPONSE = 'response';
-	
-	/**
-	 * 请求IP
-	 *
-	 * @var string
-	 */
-	const IPADDRESS = 'ipaddress';
 	
 	/**
 	 * 创建时间
@@ -102,6 +102,6 @@ class LogTrace extends TraceEloquent
      *
      * @var array<string>
      */
-    const FILLABLE = [self::ID, self::ADMIN_ID, self::API, self::PAYLOAD, self::HEADERS, self::RESPONSE, self::IPADDRESS, self::CREATED_AT, self::UPDATED_AT];
+    const FILLABLE = [self::ID, self::ADMIN_ID, self::API, self::IPADDRESS, self::PAYLOAD, self::HEADERS, self::RESPONSE, self::CREATED_AT, self::UPDATED_AT];
 
 }

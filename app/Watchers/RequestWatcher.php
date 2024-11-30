@@ -3,8 +3,8 @@
 namespace App\Watchers;
 
 use App\Constants\BackstageConstant;
-use App\Models\Models\Admin\Log as AdminLog;
-use App\Models\Traces\Admin\Log as TheTrace;
+use App\Cascade\Models\Admin\LogModel as AdminLog;
+use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 

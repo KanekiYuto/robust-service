@@ -1,102 +1,27 @@
 <?php
 
-namespace App\Models\Models\Admin;
+namespace App\Models\Admin;
 
-use App\Casts\AutoTimezone;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use KanekiYuto\Diverse\Support\Timestamp;
-use App\Models\Traces\Admin\Info as TheTrace;
-use App\Models\Traces\Admin\Role as RoleTrace;
-use App\Models\Models\Admin\Role as AdminRole;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace as RoleTrace;
+use App\Cascade\Models\Admin\RoleModel as AdminRole;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * 管理员信息模型
- *
- * @author KanekiYuto
- */
 class Info extends Authenticate
 {
 
 	use HasApiTokens, HasFactory, Notifiable;
 
-	/**
-	 * 主键是否自增
-	 *
-	 * @var bool
-	 */
-	public $incrementing = false;
-	/**
-	 * 指示模型是否主动维护时间戳
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-	/**
-	 * 模型表名称
-	 *
-	 * @var string
-	 */
-	protected $table = TheTrace::TABLE;
-	/**
-	 * 模型主键 ID
-	 *
-	 * @var string
-	 */
-	protected $primaryKey = TheTrace::ID;
-	/**
-	 * 需要被隐藏的列属性
-	 *
-	 * @var array<int, string>
-	 */
-	protected $hidden = TheTrace::HIDE;
-
-	/**
-	 * 可大量分配的属性
-	 *
-	 * @var array<string>
-	 */
-	protected $fillable = [];
-
-	/**
-	 * 应该强制转换的属性
-	 *
-	 * @var array
-	 */
-	protected $casts = [
-		RoleTrace::ABILITIES => 'json',
-		TheTrace::UPDATED_AT => AutoTimezone::class,
-		TheTrace::CREATED_AT => AutoTimezone::class,
-	];
-
-	/**
-	 * 创建一个新的 Eloquent 模型实例
-	 *
-	 * @param  array  $attributes
-	 *
-	 * @return void
-	 */
-	public function __construct(array $attributes = [])
-	{
-		$this->fillable = array_values(TheTrace::getAllColumns());
-		parent::__construct($attributes);
-	}
-
-	/**
-	 * 应该强制转换的属性
-	 *
-	 * @return array
-	 */
 	public function casts(): array
 	{
 		return [
-			'id' => function () {
-				return 1111323;
-			},
+			RoleTrace::ABILITIES => 'json',
 		];
 	}
 
