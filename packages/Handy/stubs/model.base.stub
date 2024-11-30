@@ -59,4 +59,27 @@ class {{ class }} extends Model
      */
     protected $fillable = TheTrace::FILLABLE;
 
+    /**
+     * 创建一个新的 [Eloquent] 模型实例
+     *
+     * @param  array  $attributes
+     *
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->fillable = array_values(TheTrace::getAllColumns());
+        parent::__construct($attributes);
+    }
+
+    /**
+     * 获取应该强制转换的属性
+     *
+     * @return array
+     */
+    public function casts(): array
+    {
+        {{ casts }}
+    }
+
 }

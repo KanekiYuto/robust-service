@@ -5,8 +5,6 @@ namespace App\Models\Admin;
 use KanekiYuto\Handy\Cascades\Model\BaseModel as Model;
 use App\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 
-
-
 /**
  * 管理员信息表
  *
@@ -14,8 +12,6 @@ use App\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 */
 class InfoModel extends Model
 {
-
-    use Test;
 
     /**
      * 模型表名称
@@ -58,5 +54,31 @@ class InfoModel extends Model
      * @var array<string>
      */
     protected $fillable = TheTrace::FILLABLE;
+
+    /**
+     * 创建一个新的 [Eloquent] 模型实例
+     *
+     * @param  array  $attributes
+     *
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->fillable = array_values(TheTrace::getAllColumns());
+        parent::__construct($attributes);
+    }
+
+    /**
+     * 获取应该强制转换的属性
+     *
+     * @return array
+     */
+    public function casts(): array
+    {
+        return [
+			TheTrace::CREATED_AT => 'App\Casts\AutoTimezone',
+			TheTrace::UPDATED_AT => 'App\Casts\AutoTimezone',
+		];
+    }
 
 }

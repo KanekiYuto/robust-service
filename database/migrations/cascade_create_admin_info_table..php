@@ -27,7 +27,6 @@ return new class extends Migration {
 			$table->string(column: TheTrace::PASS, length: 512)->comment(comment: '密码');
 			$table->string(column: TheTrace::CREATED_AT)->comment(comment: '创建时间');
 			$table->string(column: TheTrace::UPDATED_AT)->comment(comment: '修改时间');
-			$table->string(column: TheTrace::TEST)->charset(charset: '111')->after(column: TheTrace::ID)->change();
         });
     }
 

@@ -65,7 +65,7 @@ class Blueprint
     /**
      * 获取所有列信息
      *
-     * @return array
+     * @return ColumnDefinition[]
      */
     public function getColumns(): array
     {

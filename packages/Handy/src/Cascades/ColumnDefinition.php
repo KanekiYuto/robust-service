@@ -67,7 +67,7 @@ class ColumnDefinition
      */
     public function cast(Closure $value): self
     {
-        $this->columnParams->setCasts($value);
+        $this->columnParams->setCast($value);
 
         return $this;
     }
