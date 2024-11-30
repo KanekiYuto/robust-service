@@ -4,6 +4,8 @@ namespace KanekiYuto\Handy\Cascades\Make;
 
 use Illuminate\Support\Str;
 use KanekiYuto\Handy\Cascades\Builder;
+use KanekiYuto\Handy\Cascades\Blueprint;
+use KanekiYuto\Handy\Cascades\ModelParams;
 use KanekiYuto\Handy\Cascades\Constants\CascadeConst;
 use function Laravel\Prompts\note;
 use function Laravel\Prompts\error;
@@ -17,6 +19,24 @@ class ModelMake extends Make
 {
 
 	private array $casts = [];
+
+	private array $packages = [];
+
+	private ModelParams $modelParams;
+
+	/**
+	 * construct
+	 *
+	 * @param  Blueprint    $blueprint
+	 * @param  ModelParams  $modelParams
+	 *
+	 * @return void
+	 */
+	public function __construct(Blueprint $blueprint, ModelParams $modelParams)
+	{
+		$this->modelParams = $modelParams;
+		parent::__construct($blueprint);
+	}
 
 	/**
 	 * 引导构建
@@ -38,9 +58,12 @@ class ModelMake extends Make
 		}
 
 		$blueprint = $this->blueprint;
+		$modelParams = $this->modelParams;
+
 		$table = $blueprint->getTable();
 		$className = $this->getClassName($table, CascadeConst::MODEL_FILE_SUFFIX);
 		$namespace = $this->getNamespace($table, [
+			CascadeConst::CASCADE_NAMESPACE,
 			CascadeConst::MODEL_NAMESPACE,
 		]);
 
@@ -51,36 +74,26 @@ class ModelMake extends Make
 		]));
 
 		$this->param('class', $className);
-		$this->param('usePackage', '');
-		$this->param('useTrait', $this->useTrait());
 		$this->param('comment', $blueprint->getComment());
 
 		$this->param('traceEloquent', $this->getPackage($table, [
+			CascadeConst::CASCADE_NAMESPACE,
 			CascadeConst::TRACE_NAMESPACE,
 			CascadeConst::TRACE_ELOQUENT_NAMESPACE,
 		], CascadeConst::TRACE_NAMESPACE));
 
 		$this->param('table', $table);
-		$this->param('timestamps', false);
-		$this->param('incrementing', false);
+
+		$this->param('timestamps', $modelParams->isTimestamps());
+		$this->param('incrementing', $modelParams->isIncrementing());
+		$this->param('extends', $modelParams->getExtends());
 
 		$this->columns();
 		$this->param('casts', $this->casts());
-
-		var_dump($this->casts);
+		$this->param('usePackages', $this->usePackages());
 
 		$this->stub = $this->formattingStub($this->stub);
 		$this->putFile($namespace, $className);
-	}
-
-	/**
-	 * 使用 [trait]
-	 *
-	 * @return string
-	 */
-	private function useTrait(): string
-	{
-		return '';
 	}
 
 	private function columns(): void
@@ -108,19 +121,54 @@ class ModelMake extends Make
 	private function casts(): string
 	{
 		if (empty($this->casts)) {
-			return 'return [];';
+			return 'return array_merge(parent::casts(), []);';
 		}
 
-		$template[] = 'return [';
+		$templates[] = 'return array_merge(parent::casts(), [';
 
 		$casts = collect($this->casts)->map(function (string $value, string $key) {
-			return "\t$key => '$value',";
+			if (class_exists($value)) {
+				$namespace = explode(CascadeConst::NAMESPACE_SEPARATOR, $value);
+				$className = $namespace[count($namespace) - 1];
+				$value = "$className::class";
+				$this->addPackage(implode(CascadeConst::NAMESPACE_SEPARATOR, $namespace));
+			} else {
+				$value = "'$value'";
+			}
+
+			return "\t$key => $value,";
 		})->all();
 
-		$template = array_merge($template, $casts);
-		$template[] = '];';
+		$templates = array_merge($templates, $casts);
+		$templates[] = ']);';
 
-		return implode("\n\t\t", $template);
+		return implode("\n\t\t", $templates);
+	}
+
+	private function addPackage(string $value): void
+	{
+		if (!in_array($value, $this->packages)) {
+			$this->packages[] = $value;
+		}
+	}
+
+	private function usePackages(): string
+	{
+		$packages = collect($this->packages)->map(function (string $value) {
+			return "use $value;";
+		})->all();
+
+		return implode("\n", $packages);
+	}
+
+	/**
+	 * 使用 [trait]
+	 *
+	 * @return string
+	 */
+	private function useTrait(): string
+	{
+		return '';
 	}
 
 }

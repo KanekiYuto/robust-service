@@ -4,7 +4,7 @@ namespace App\Models\Models\Admin;
 
 use App\Casts\AutoTimezone;
 use App\Models\Traces\Admin\Log as TheTrace;
-use App\Models\Models\Admin\Info as AdminInfo;
+use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;

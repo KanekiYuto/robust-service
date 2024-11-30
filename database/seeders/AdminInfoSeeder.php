@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Models\Admin\Info as AdminInfo;
-use App\Models\Traces\Admin\Info as TheTrace;
+//use App\Cascade\Models\Admin\InfoModel as AdminInfo;
+//use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
+use App\Cascade\Models\Admin\InfoModel as AdminInfo;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace AS TheTrace;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;

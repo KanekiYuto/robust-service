@@ -12,6 +12,8 @@ class CascadeConst
 
     const NAMESPACE_SEPARATOR = '\\';
 
+	const CASCADE_NAMESPACE = 'Cascade';
+
     const APP_NAMESPACE = 'App';
 
     const APP_NAMESPACE_PATH = 'app';

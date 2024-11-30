@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backstage\Admin;
 
 use App\Http\Service\Backstage\Admin\InfoService;
-use App\Models\Traces\Admin\Info as TheTrace;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
 use KanekiYuto\Diverse\Preacher\Preacher;
 use Illuminate\Http\JsonResponse;

@@ -59,13 +59,13 @@ class CascadeCommand extends BaseCommand
         }
 
         if (!($cascade instanceof Cascade)){
-            warning('该 [Cascade1] 不可用！');
+            warning('该 [Cascade] 不可用！');
             return 0;
         }
 
         info('开始执行...');
 
-        $cascade->run();
+		$cascade->create();
     }
 
 }

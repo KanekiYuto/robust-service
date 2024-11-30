@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backstage;
 
 use App\Constants\BackstageConstant;
 use App\Http\Service\Backstage\AdminService;
-use App\Models\Models\Admin\Info as AdminInfo;
+use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use KanekiYuto\Diverse\Preacher\Preacher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;

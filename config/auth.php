@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\BackstageConstant;
-use App\Models\Models\Admin\Info;
+use App\Cascade\Models\Admin\InfoModel as AdminInfoModel;
 
 return [
 
@@ -70,7 +70,7 @@ return [
     'providers' => [
         BackstageConstant::GUARD => [
             'driver' => 'eloquent',
-            'model' => Info::class,
+            'model' => AdminInfoModel::class,
         ],
 
         'users' => [

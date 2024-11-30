@@ -20,20 +20,6 @@ class Builder
 {
 
     /**
-     * 表名称
-     *
-     * @var string
-     */
-    private static string $table;
-
-    /**
-     * 表备注
-     *
-     * @var string
-     */
-    private static string $comment;
-
-    /**
      * 创建实例
      *
      * @param string $table
@@ -48,10 +34,7 @@ class Builder
         string  $comment = ''
     ): void
     {
-        self::$table = $table;
-        self::$comment = $comment;
-
-        $blueprint = new Blueprint(self::$table, self::$comment);
+        $blueprint = new Blueprint($table, $comment);
 
         $callback($blueprint);
 

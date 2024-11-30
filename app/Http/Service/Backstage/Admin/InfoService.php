@@ -2,8 +2,8 @@
 
 namespace App\Http\Service\Backstage\Admin;
 
-use App\Models\Models\Admin\Info as AdminInfo;
-use App\Models\Traces\Admin\Info as TheTrace;
+use App\Cascade\Models\Admin\InfoModel as AdminInfo;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 use Illuminate\Support\Facades\Hash;
 use Kaneki\Diverse\Equation\Equation;
 use Kaneki\Diverse\Equation\Formulas;

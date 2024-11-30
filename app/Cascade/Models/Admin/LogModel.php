@@ -1,18 +1,18 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Cascade\Models\Admin;
 
-use {{ extends }} as Model;
-use {{ traceEloquent }} as TheTrace;
+use App\Models\Admin\Log as Model;
+use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 
-{{ usePackages }}
+use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;
 
 /**
- * {{ comment }}
+ * 管理员日志表
  *
  * @author KanekiYuto
 */
-class {{ class }} extends Model
+class LogModel extends Model
 {
 
     /**
@@ -34,14 +34,14 @@ class {{ class }} extends Model
      *
      * @var bool
      */
-    public $incrementing = {{ incrementing }};
+    public $incrementing = false;
 
     /**
      * 指示模型是否主动维护时间戳
      *
      * @var bool
      */
-    public $timestamps = {{ timestamps }};
+    public $timestamps = false;
 
     /**
      * 需要被隐藏的列属性
@@ -64,7 +64,10 @@ class {{ class }} extends Model
      */
     public function casts(): array
     {
-        {{ casts }}
+        return array_merge(parent::casts(), [
+			TheTrace::CREATED_AT => AutoTimezone::class,
+			TheTrace::UPDATED_AT => AutoTimezone::class,
+		]);
     }
 
 }
