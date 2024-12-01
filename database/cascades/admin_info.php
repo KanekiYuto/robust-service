@@ -13,7 +13,7 @@ return Cascade::configure()->withTable(
 	$table->string('account', 32)->comment('账号');
 	$table->bigInteger('admin_role_id')->index()->comment('角色ID');
 	$table->string('email', 32)->comment('邮箱');
-	$table->string('pass', 512)->comment('密码');
+	$table->string('pass', 512)->hidden()->comment('密码');
 
 	$table->bigInteger('created_at')->cast(function () {
 		return AutoTimezone::class;

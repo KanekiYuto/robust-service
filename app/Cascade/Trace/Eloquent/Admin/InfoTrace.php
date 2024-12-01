@@ -81,13 +81,13 @@ class InfoTrace extends TraceEloquent
      *
      * @var array<int, string>
      */
-    const HIDDEN = [];
+    const HIDDEN = [self::PASS];
 
     /**
      * 可填充的列
      *
-     * @var array<string>
+     * @var array<int, string>
      */
-    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::PASS, self::CREATED_AT, self::UPDATED_AT];
+    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::CREATED_AT, self::UPDATED_AT];
 
 }

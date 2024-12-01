@@ -3,7 +3,6 @@
 namespace KanekiYuto\Handy\Cascades\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use KanekiYuto\Handy\Trace\TraceEloquent;
 
 /**
  * 基础模型
@@ -12,12 +11,5 @@ use KanekiYuto\Handy\Trace\TraceEloquent;
  */
 abstract class BaseModel extends Model
 {
-
-	/**
-	 * 追踪类
-	 *
-	 * @var string
-	 */
-	protected string $trace = TraceEloquent::class;
 
 }

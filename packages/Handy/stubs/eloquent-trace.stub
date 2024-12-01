@@ -38,7 +38,7 @@ class {{ class }} extends TraceEloquent
     /**
      * 可填充的列
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     const FILLABLE = [{{ fillable }}];
 
