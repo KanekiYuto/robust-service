@@ -10,64 +10,67 @@ namespace App\Routes\Register;
 abstract class Register
 {
 
-    /**
-     * 路由名称
-     *
-     * @var string|null
-     */
-    protected string|null $name = null;
+	/**
+	 * 路由名称
+	 *
+	 * @var string|null
+	 */
+	protected string|null $name = null;
 
-    /**
-     * 中间件
-     *
-     * @var array
-     */
-    protected array $middleware = [];
+	/**
+	 * 中间件
+	 *
+	 * @var array
+	 */
+	protected array $middleware = [];
 
-    /**
-     * 排除中间件
-     *
-     * @var array
-     */
-    protected array $withoutMiddleware = [];
+	/**
+	 * 排除中间件
+	 *
+	 * @var array
+	 */
+	protected array $withoutMiddleware = [];
 
-    /**
-     * 设置路由名称
-     *
-     * @param  string  $name
-     * @return static
-     */
-    public function name(string $name): static
-    {
-        $this->name = $name;
+	/**
+	 * 设置路由名称
+	 *
+	 * @param  string  $name
+	 *
+	 * @return static
+	 */
+	public function name(string $name): static
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * 设置路由中间件
-     *
-     * @param  array  $middleware
-     * @return static
-     */
-    public function middleware(array $middleware): static
-    {
-        $this->middleware = $middleware;
+	/**
+	 * 设置路由中间件
+	 *
+	 * @param  array  $middleware
+	 *
+	 * @return static
+	 */
+	public function middleware(array $middleware): static
+	{
+		$this->middleware = $middleware;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * 设置排除路由中间件
-     *
-     * @param  array  $withoutMiddleware
-     * @return static
-     */
-    public function withoutMiddleware(array $withoutMiddleware): static
-    {
-        $this->withoutMiddleware = $withoutMiddleware;
+	/**
+	 * 设置排除路由中间件
+	 *
+	 * @param  array  $withoutMiddleware
+	 *
+	 * @return static
+	 */
+	public function withoutMiddleware(array $withoutMiddleware): static
+	{
+		$this->withoutMiddleware = $withoutMiddleware;
 
-        return $this;
-    }
+		return $this;
+	}
 
 }

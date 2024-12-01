@@ -214,7 +214,7 @@ class Ability
      */
     public static function abilities(string $rely): array
     {
-        $abilities = collect([]);
+        $abilities = collect();
 
         self::$abilities->each(function (Collection $item) use (
             $abilities,
@@ -242,7 +242,7 @@ class Ability
      */
     public static function groups(string $rely): array
     {
-        $abilities = collect([]);
+        $abilities = collect();
 
         self::$groups->each(function (Collection $item) use (
             $abilities,
@@ -281,7 +281,7 @@ class Ability
      */
     public static function permission(array $abilities = []): array
     {
-        $permission = collect([]);
+        $permission = collect();
 
         $abilities = self::$abilities->whereIn('uuid', $abilities);
         $abilities->each(function (Collection $item) use ($permission) {

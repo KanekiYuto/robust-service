@@ -13,110 +13,113 @@ use Illuminate\Support\Facades\Route as RouteFacades;
 class GroupRegister extends Register
 {
 
-    /**
-     * 回调函数
-     *
-     * @var Closure
-     */
-    private Closure $callback;
+	/**
+	 * 回调函数
+	 *
+	 * @var Closure
+	 */
+	private Closure $callback;
 
-    /**
-     * 控制器名称
-     *
-     * @var string|null
-     */
-    private string|null $controller = null;
+	/**
+	 * 控制器名称
+	 *
+	 * @var string|null
+	 */
+	private string|null $controller = null;
 
-    /**
-     * [URI] 前缀
-     *
-     * @var string|null
-     */
-    private string|null $prefix = null;
+	/**
+	 * [URI] 前缀
+	 *
+	 * @var string|null
+	 */
+	private string|null $prefix = null;
 
-    /**
-     * 构造函数
-     *
-     * @param  Closure  $callback
-     */
-    public function __construct(
-        Closure $callback
-    ) {
-        $this->callback = $callback;
-    }
+	/**
+	 * 构造函数
+	 *
+	 * @param  Closure  $callback
+	 */
+	public function __construct(
+		Closure $callback
+	) {
+		$this->callback = $callback;
+	}
 
-    /**
-     * 设置控制器
-     *
-     * @param  string  $controller
-     * @return static
-     */
-    public function controller(string $controller): static
-    {
-        $this->controller = $controller;
+	/**
+	 * 设置 [URI] 前缀和路由名称
+	 *
+	 * @param  string       $prefix
+	 * @param  string|null  $name
+	 *
+	 * @return static
+	 */
+	public function prefixAndName(
+		string $prefix,
+		string|null $name = null
+	): static {
+		$this->prefix = $prefix;
+		$this->name = empty($name) ? $prefix : $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * 设置 [URI] 前缀
-     *
-     * @param  string  $prefix
-     * @return static
-     */
-    public function prefix(string $prefix): static
-    {
-        $this->prefix = $prefix;
+	/**
+	 * 添加路由信息到组中
+	 *
+	 * @return void
+	 */
+	public function __destruct()
+	{
+		if (!empty($this->name)) {
+			$this->name = '.'.$this->name;
+		}
 
-        return $this;
-    }
+		$callback = $this->callback;
 
-    /**
-     * 设置 [URI] 前缀和路由名称
-     *
-     * @param  string  $prefix
-     * @param  string|null  $name
-     * @return static
-     */
-    public function prefixAndName(
-        string $prefix,
-        string|null $name = null
-    ): static {
-        $this->prefix = $prefix;
-        $this->name = empty($name) ? $prefix : $name;
+		$route = RouteFacades::middleware($this->middleware);
+		$route = $route->withoutMiddleware($this->withoutMiddleware);
 
-        return $this;
-    }
+		if (!empty($this->name)) {
+			$route = $route->name($this->name);
+		}
 
-    /**
-     * 添加路由信息到组中
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        if (!empty($this->name)) {
-            $this->name = '.'.$this->name;
-        }
+		if (!empty($this->prefix)) {
+			$route = $route->prefix($this->prefix);
+		}
 
-        $callback = $this->callback;
+		if (!empty($this->controller)) {
+			$route = $route->controller($this->controller);
+		}
 
-        $route = RouteFacades::middleware($this->middleware);
-        $route = $route->withoutMiddleware($this->withoutMiddleware);
+		$route->group($callback);
+	}
 
-        if (!empty($this->name)) {
-            $route = $route->name($this->name);
-        }
+	/**
+	 * 设置 [URI] 前缀
+	 *
+	 * @param  string  $prefix
+	 *
+	 * @return static
+	 */
+	public function prefix(string $prefix): static
+	{
+		$this->prefix = $prefix;
 
-        if (!empty($this->prefix)) {
-            $route = $route->prefix($this->prefix);
-        }
+		return $this;
+	}
 
-        if (!empty($this->controller)) {
-            $route = $route->controller($this->controller);
-        }
+	/**
+	 * 设置控制器
+	 *
+	 * @param  string  $controller
+	 *
+	 * @return static
+	 */
+	public function controller(string $controller): static
+	{
+		$this->controller = $controller;
 
-        $route->group($callback);
-    }
+		return $this;
+	}
 
 }

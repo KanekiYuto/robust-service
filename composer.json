@@ -8,14 +8,14 @@
         "php": "^8.2",
         "ext-pdo": "*",
         "ext-zlib": "*",
-        "diverse/preacher": "dev-main",
         "diverse/support": "dev-main",
         "laravel/framework": "^11.9",
         "laravel/octane": "^2.5",
         "laravel/prompts": "^0.3.2",
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.2",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "handy-fp/framework": "dev-0.x-alpha"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -31,8 +31,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Kaneki\\Diverse\\": "packages/Diverse/src/",
-            "KanekiYuto\\Handy\\": "packages/Handy/src/"
+            "Kaneki\\Diverse\\": "packages/Diverse/src/"
         }
     },
     "autoload-dev": {

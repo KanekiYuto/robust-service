@@ -2,8 +2,6 @@
 
 namespace Kaneki\Diverse\Cascade;
 
-use Illuminate\Database\Migrations\Migration;
-
 /**
  * 将有关数据库的所有信息串连 [Cascade]
  *

@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use KanekiYuto\Diverse\Preacher\Preacher;
 use Illuminate\Validation\ValidationException;
+use KanekiYuto\Handy\Support\Facades\Preacher;
+use KanekiYuto\Handy\Preacher\PreacherResponse;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use App\Http\Middleware\Authenticate as AuthenticateMiddleware;
@@ -46,14 +47,14 @@ return Application::configure(basePath: dirname(__DIR__))->withRouting(
 
 	$exceptions->render(function (ValidationException $e) {
 		return Preacher::msgCode(
-			Preacher::RESP_CODE_WARN,
+			PreacherResponse::RESP_CODE_WARN,
 			$e->getMessage()
 		)->export()->json();
 	});
 
 	$exceptions->render(function (Exception $e) {
 		return Preacher::msgCode(
-			Preacher::RESP_CODE_WARN,
+			PreacherResponse::RESP_CODE_WARN,
 			$e->getMessage()
 		)->export()->json();
 	});
