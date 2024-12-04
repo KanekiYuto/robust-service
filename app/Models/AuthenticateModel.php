@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use KanekiYuto\Diverse\Support\Timestamp;
-use KanekiYuto\Handy\Cascades\Model\AuthenticateModel as Model;
 
-class AuthenticateModel extends Model
+class AuthenticateModel extends Authenticate
 {
 
 	/**

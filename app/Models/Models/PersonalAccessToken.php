@@ -44,7 +44,7 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
 	 *
 	 * @var array<int, string>
 	 */
-	protected $hidden = TheTrace::HIDE;
+	protected $hidden = TheTrace::HIDDEN;
 
 	/**
 	 * 可大量分配的属性

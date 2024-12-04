@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Admin\Info as Model;
-use KanekiYuto\Handy\Cascades\Cascade;
-use KanekiYuto\Handy\Cascades\Blueprint;
-use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;
+use KanekiYuto\Handy\Cascade\Cascade;
+use KanekiYuto\Handy\Cascade\Blueprint;
+use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
 
 return Cascade::configure()->withTable(
 	'admin_info',

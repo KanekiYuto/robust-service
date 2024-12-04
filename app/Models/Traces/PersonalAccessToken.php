@@ -2,7 +2,7 @@
 
 namespace App\Models\Traces;
 
-use Kaneki\Diverse\Trace\TraceEloquent;
+use KanekiYuto\Handy\Trace\TraceEloquent;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）
@@ -87,6 +87,6 @@ class PersonalAccessToken extends TraceEloquent
 	 *
 	 * @var array
 	 */
-	const HIDE = [self::TOKEN];
+	const HIDDEN = [self::TOKEN];
 
 }

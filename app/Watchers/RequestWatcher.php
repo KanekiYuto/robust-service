@@ -11,7 +11,9 @@ use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 /**
  * 请求监视器
  *
- * @author beta
+ * @todo 可能需要重新写该类
+ *
+ * @author KanekiYuto
  */
 class RequestWatcher extends Watcher
 {

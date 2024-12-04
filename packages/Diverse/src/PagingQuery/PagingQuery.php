@@ -51,6 +51,8 @@ class PagingQuery
 			'order' => ['required', Rule::in(['asc', 'desc'])],
 		], self::pagingParamsEncode($queryRule)));
 
+		database_path();
+
 		// 回调对应的服务类方法
 		$callback = call_user_func(
 			[$class, $method],

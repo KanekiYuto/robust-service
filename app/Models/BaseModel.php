@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use KanekiYuto\Diverse\Support\Timestamp;
-use KanekiYuto\Handy\Cascades\Model\BaseModel as Model;
+use KanekiYuto\Handy\Foundation\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {

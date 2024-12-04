@@ -6,7 +6,7 @@ use App\Models\BaseModel as Model;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 use Illuminate\Database\Eloquent\Builder;
 
-use KanekiYuto\Handy\Cascades\Casts\AutoTimezone;
+use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
 
 /**
  * 管理员权限表

@@ -79,7 +79,7 @@ class RoleTrace extends TraceEloquent
     /**
      * 可填充的列
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     const FILLABLE = [self::ID, self::NAME, self::EXPLAIN, self::ABILITIES, self::CREATED_AT, self::UPDATED_AT];
 

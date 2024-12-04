@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backstage;
 use App\Ability\Ability;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
-use App\Cascade\Models\Admin\InfoModel;
 use KanekiYuto\Handy\Support\Facades\Preacher;
 
 /**
@@ -28,8 +27,6 @@ class AbilityController
 		$requestParams = $request::validate([
 			'rely' => ['required', 'string'],
 		]);
-
-		InfoModel::query()->create();
 
 		return Preacher::rows(
 			Ability::abilities($requestParams['rely'])
