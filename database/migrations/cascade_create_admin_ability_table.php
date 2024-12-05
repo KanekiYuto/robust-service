@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Database Migration [管理员能力信息表]
+ * Database Migration []
  *
  * @author KanekiYuto
  */
@@ -20,7 +20,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create(TheTrace::TABLE, function (Blueprint $table) {
-            $table->string(column: TheTrace::ID)->primary()->unique()->comment(comment: '能力 - [ID]');
+            $table->bigInteger(column: TheTrace::ID)->primary()->unique()->comment(comment: '能力 - [ID]');
 			$table->string(column: TheTrace::NAME, length: 32)->comment(comment: '能力名称');
 			$table->string(column: TheTrace::EXPLAIN, length: 64)->nullable()->comment(comment: '能力解释');
 			$table->uuid(column: TheTrace::CURRENT_UUID)->comment(comment: '唯一标识');
@@ -29,8 +29,8 @@ return new class extends Migration {
 			$table->json(column: TheTrace::CLIENT_ROUTING)->comment(comment: '客户端路由');
 			$table->json(column: TheTrace::OPERATION)->comment(comment: '允许操作的权限');
 			$table->enum(column: TheTrace::TYPE, allowed: ['group', 'ability'])->comment(comment: '能力类型');
-			$table->string(column: TheTrace::CREATED_AT)->comment(comment: '创建时间');
-			$table->string(column: TheTrace::UPDATED_AT)->comment(comment: '修改时间');
+			$table->bigInteger(column: TheTrace::CREATED_AT)->comment(comment: '创建时间');
+			$table->bigInteger(column: TheTrace::UPDATED_AT)->comment(comment: '修改时间');
         });
     }
 
