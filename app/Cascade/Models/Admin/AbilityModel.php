@@ -6,10 +6,8 @@ use App\Models\Admin\Ability as Model;
 use App\Cascade\Trace\Eloquent\Admin\AbilityTrace as TheTrace;
 use Illuminate\Database\Eloquent\Builder;
 
-use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
-
 /**
- * 管理员能力信息表
+ * 
  *
  * @author KanekiYuto
 */
@@ -70,15 +68,9 @@ class AbilityModel extends Model
      *
      * @return array
      */
-    protected function casts(): array
+    public function casts(): array
     {
-        return array_merge(parent::casts(), [
-			TheTrace::SERVER_ROUTING => 'json',
-			TheTrace::CLIENT_ROUTING => 'json',
-			TheTrace::OPERATION => 'json',
-			TheTrace::CREATED_AT => AutoTimezone::class,
-			TheTrace::UPDATED_AT => AutoTimezone::class,
-		]);
+        return array_merge(parent::casts(), []);
     }
 
     /**
