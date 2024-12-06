@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Info as Model;
+use Laravel\Sanctum\PersonalAccessToken as Model;
 use KanekiYuto\Handy\Cascade\Cascade;
 use KanekiYuto\Handy\Cascade\Blueprint;
 
