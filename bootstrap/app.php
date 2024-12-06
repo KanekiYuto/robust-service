@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\PreacherMiddleware;
 use Illuminate\Validation\ValidationException;
 use KanekiYuto\Handy\Support\Facades\Preacher;
 use KanekiYuto\Handy\Preacher\PreacherResponse;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))->withRouting(
 	using: function () {
 		Route::middleware('api')
 			->prefix('api')
+            ->middleware(PreacherMiddleware::class)
 			->group(base_path('routes/api.php'));
 
 		Route::prefix('backstage')

@@ -2,14 +2,19 @@
 
 namespace App\Models\Admin;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\AuthenticateModel as Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Cascade\Models\Admin\RoleModel as AdminRole;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as RoleTrace;
 
 class Info extends Model
 {
+
+    use HasApiTokens, HasFactory, Notifiable;
 
 	public function casts(): array
 	{
