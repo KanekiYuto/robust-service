@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cascade\Trace\Eloquent\Personal\Access;
+namespace App\Cascade\Trace\Eloquent\PersonalAccess;
 
 use KanekiYuto\Handy\Trace\TraceEloquent;
 

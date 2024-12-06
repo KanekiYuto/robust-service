@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Cascade\Models\Personal\Access;
+namespace App\Cascade\Models\PersonalAccess;
 
-use App\Models\Admin\Info as Model;
-use App\Cascade\Trace\Eloquent\Personal\Access\TokensTrace as TheTrace;
+use App\Cascade\ExtendsModels\PersonalAccess\TokensExtendsModel as Model;
+use App\Cascade\Trace\Eloquent\PersonalAccess\TokensTrace as TheTrace;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
