@@ -2,7 +2,7 @@
 version: '3.2'
 services:
 
-#     [Web] 服务 (Nginx)
+    # [Web] 服务 (Nginx)
     web_service:
         container_name: '${DOCKER_APP_ID}-web-service'
         image: 'nginx:1.22.1'
@@ -27,13 +27,13 @@ services:
         networks:
             - default
 
-#     [PHP] 服务 (CLI/SWOOLE)
+    # [PHP] 服务 (CLI/SWOOLE)
     php_service:
         container_name: '${DOCKER_APP_ID}-php-service'
-#        如有需要可以自行添加代码重新构建镜像
-#        build:
-#            context: ./docker/Dockerfile/php
-#            dockerfile: Dockerfile
+        # 如有需要可以自行添加代码重新构建镜像
+        # build:
+        # context: ./docker/Dockerfile/php
+        # dockerfile: Dockerfile
         image: 'southwan/phpswoole8.2:beta0.1'
         ports:
             - '${DOCKER_PHP_SWOOLE_CONTAINER_PORT:-1081}:${DOCKER_PHP_SWOOLE_CONTAINER_PORT:-1081}'
@@ -45,21 +45,21 @@ services:
         networks:
             - default
 
-#     [MySql] 数据库服务
+    # [MySql] 数据库服务
     mysql_service:
         container_name: '${DOCKER_APP_ID}-mysql-service'
         image: 'mysql:8.0'
         ports:
             - '${DOCKER_MYSQL_EXPOSE_PORT:-3306}:${DOCKER_MYSQL_CONTAINER_PORT:-3306}'
         environment:
-#           MySQL 时区
+            #           MySQL 时区
             TZ: 'Asia/Shanghai'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: "%"
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
-#            是否允许密码为空 （默认允许）
+            #            是否允许密码为空 （默认允许）
             MYSQL_ALLOW_EMPTY_PASSWORD: 0
         volumes:
             - './docker/conf/mysql/my.cnf:/etc/my.cnf'
@@ -72,7 +72,7 @@ services:
             retries: 3
             timeout: 5s
 
-#     [Redis] 数据库服务 (NoSql)
+    # [Redis] 数据库服务 (NoSql)
     redis_service:
         container_name: '${DOCKER_APP_ID}-redis-service'
         image: 'redis:7.0.8'
@@ -92,7 +92,7 @@ networks:
         driver: bridge
 
 volumes:
-#   修改配置后需要删除卷才会生效配置
+    # 修改配置后需要删除卷才会生效配置
     mysql-service:
         driver: local
     redis-service:
