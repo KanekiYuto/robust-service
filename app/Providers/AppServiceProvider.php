@@ -6,7 +6,7 @@ use App\Ability\Ability;
 use Laravel\Sanctum\Sanctum;
 use App\Watchers\RequestWatcher;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Models\PersonalAccessToken;
+use App\Cascade\Models\PersonalAccess\TokensModel as PersonalAccessTokensModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
 		$watcher = $this->app->make(RequestWatcher::class);
 		$watcher->register($this->app);
 
-		Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+		Sanctum::usePersonalAccessTokenModel(PersonalAccessTokensModel::class);
 		Ability::use();
 	}
 

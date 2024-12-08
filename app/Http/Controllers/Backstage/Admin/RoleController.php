@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backstage\Admin;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
+use KanekiYuto\Handy\Preacher\PreacherResponse;
 use App\Http\Service\Backstage\Admin\RoleService;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 
@@ -21,9 +21,9 @@ class RoleController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function paging(Request $request): JsonResponse
+	public function paging(Request $request): PreacherResponse
 	{
 		return PagingQuery::request(
 			request: $request,
@@ -36,17 +36,17 @@ class RoleController
 			queryRule: [
 				'id' => ['nullable', 'string'],
 			]
-		)->export()->json();
+		);
 	}
 
 	/**
 	 * 管理员角色选项
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function select(): JsonResponse
+	public function select(): PreacherResponse
 	{
-		return RoleService::select()->export()->json();
+		return RoleService::select();
 	}
 
 	/**
@@ -54,9 +54,9 @@ class RoleController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function append(Request $request): JsonResponse
+	public function append(Request $request): PreacherResponse
 	{
 		$requestParams = $request::validate([
 			'name' => ['required', 'string'],
@@ -66,7 +66,7 @@ class RoleController
 		return RoleService::append(
 			$requestParams['name'],
 			$requestParams['explain']
-		)->export()->json();
+		);
 	}
 
 	/**
@@ -74,9 +74,9 @@ class RoleController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function modify(Request $request): JsonResponse
+	public function modify(Request $request): PreacherResponse
 	{
 		$requestParams = $request::validate([
 			'id' => ['required', 'integer'],
@@ -88,7 +88,7 @@ class RoleController
 			$requestParams['id'],
 			$requestParams['name'],
 			$requestParams['explain'] ?? ''
-		)->export()->json();
+		);
 	}
 
 	public function delete(Request $request): void
@@ -100,9 +100,9 @@ class RoleController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function ability(Request $request): JsonResponse
+	public function ability(Request $request): PreacherResponse
 	{
 		$requestParams = $request::validate([
 			'id' => ['required', 'integer'],
@@ -112,7 +112,7 @@ class RoleController
 		return RoleService::ability(
 			$requestParams['id'],
 			$requestParams['abilities'],
-		)->export()->json();
+		);
 	}
 
 }

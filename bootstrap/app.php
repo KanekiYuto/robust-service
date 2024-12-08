@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))->withRouting(
 
 		Route::prefix('backstage')
 			->name('backstage')
+            ->middleware(PreacherMiddleware::class)
 			->group(base_path('routes/backstage.php'));
 	},
 	commands: __DIR__.'/../routes/console.php',

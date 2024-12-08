@@ -2,14 +2,17 @@
 
 namespace App\Cascade\Models\Admin;
 
-use App\Models\Admin\Info as Model;
-use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 use Illuminate\Database\Eloquent\Builder;
+use KanekiYuto\Handy\Trace\EloquentTrace;
+use KanekiYuto\Handy\Activity\Eloquent\Activity as EloquentActivity;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheEloquentTrace;
+use App\Activity\Eloquent\Admin\Info as TheActivity;
+use App\Models\Admin\Info as Model;
 
 use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
 
 /**
- * 管理员信息表
+ * 
  *
  * @author KanekiYuto
 */
@@ -17,25 +20,32 @@ class InfoModel extends Model
 {
 
     /**
-     * 追踪类
+     * [Eloquent] 模型追踪类
      *
-     * @var string
+     * @var EloquentTrace
      */
-    protected string $trace = TheTrace::class;
+    protected EloquentTrace $eloquentTrace;
+
+    /**
+     * 模型生命周期
+     *
+     * @var EloquentActivity
+     */
+    protected EloquentActivity $modelActivity;
 
     /**
      * 模型表名称
      *
      * @var string
      */
-    protected $table = TheTrace::TABLE;
+    protected $table = TheEloquentTrace::TABLE;
 
     /**
-     * 模型主键 ID
+     * 模型主键 - [ID]
      *
      * @var string
      */
-    protected $primaryKey = TheTrace::PRIMARY_KEY;
+    protected $primaryKey = TheEloquentTrace::PRIMARY_KEY;
 
     /**
      * 主键是否自增
@@ -56,14 +66,27 @@ class InfoModel extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = TheTrace::HIDDEN;
+    protected $hidden = TheEloquentTrace::HIDDEN;
 
     /**
      * 可大量分配的属性
      *
      * @var array<string>
      */
-    protected $fillable = TheTrace::FILLABLE;
+    protected $fillable = TheEloquentTrace::FILLABLE;
+
+    /**
+     * 创建一个 [Eloquent] 模型实例
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->eloquentTrace = new TheEloquentTrace();
+        $this->modelActivity = new TheActivity();
+
+        parent::__construct();
+    }
 
     /**
      * 获取应该强制转换的属性
@@ -73,8 +96,8 @@ class InfoModel extends Model
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-			TheTrace::CREATED_AT => AutoTimezone::class,
-			TheTrace::UPDATED_AT => AutoTimezone::class,
+			TheEloquentTrace::CREATED_AT => AutoTimezone::class,
+			TheEloquentTrace::UPDATED_AT => AutoTimezone::class,
 		]);
     }
 
@@ -87,6 +110,10 @@ class InfoModel extends Model
      */
     protected function performInsert(Builder $query): bool
     {
+        if (!$this->modelActivity->performInsert($this, $query, $this->eloquentTrace)) {
+            return false;
+        }
+
         return parent::performInsert($query);
     }
 
@@ -99,6 +126,10 @@ class InfoModel extends Model
      */
     protected function performUpdate(Builder $query): bool
     {
+        if (!$this->modelActivity->performUpdate($this, $query, $this->eloquentTrace)) {
+            return false;
+        }
+
         return parent::performUpdate($query);
     }
 

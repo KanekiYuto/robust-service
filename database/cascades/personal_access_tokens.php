@@ -1,8 +1,9 @@
 <?php
 
-use Laravel\Sanctum\PersonalAccessToken as Model;
 use KanekiYuto\Handy\Cascade\Cascade;
 use KanekiYuto\Handy\Cascade\Blueprint;
+use Laravel\Sanctum\PersonalAccessToken as Model;
+use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as EloquentActivity;
 
 return Cascade::configure()->withTable(
     'personal_access_tokens',
@@ -10,11 +11,11 @@ return Cascade::configure()->withTable(
 )->withBlueprint(function (Blueprint $table) {
     $table->bigInteger('id')->comment('私人访问令牌ID');
     $table->morphs('tokenable')->comment('令牌能力');
-    $table->string('name')->comment('令牌名称');
-    $table->string('token', 64)->unique()->comment('令牌内容');
-    $table->text('abilities')->nullable()->comment('令牌能力');
+    $table->string('name')->fillable()->comment('令牌名称');
+    $table->string('token', 64)->unique()->fillable()->hidden()->comment('令牌内容');
+    $table->text('abilities')->nullable()->fillable()->comment('令牌能力');
     $table->timestamp('last_used_at')->nullable()->comment('令牌最终使用时间');
-    $table->timestamp('expires_at')->nullable()->comment('令牌过期时间');
+    $table->timestamp('expires_at')->nullable()->fillable()->comment('令牌过期时间');
     $table->bigInteger('created_at')->comment('创建时间');
     $table->bigInteger('updated_at')->comment('修改时间');
-})->withModel(Model::class);
+})->withModel(Model::class, EloquentActivity::class);

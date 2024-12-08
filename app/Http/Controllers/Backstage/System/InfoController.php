@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backstage\System;
 
-use Illuminate\Http\JsonResponse;
 use KanekiYuto\Handy\Support\Facades\Preacher;
+use KanekiYuto\Handy\Preacher\PreacherResponse;
 
 /**
  * 系統信息
@@ -16,9 +16,9 @@ class InfoController
 	/**
 	 * 基础信息
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function base(): JsonResponse
+	public function base(): PreacherResponse
 	{
 		return Preacher::rows([
 			[
@@ -41,7 +41,7 @@ class InfoController
 				'label' => 'Broadcasting driver',
 				'value' => config('broadcasting.default'),
 			],
-		])->export()->json();
+		]);
 	}
 
 }

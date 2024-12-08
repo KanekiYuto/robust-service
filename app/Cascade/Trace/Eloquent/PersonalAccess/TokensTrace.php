@@ -2,14 +2,14 @@
 
 namespace App\Cascade\Trace\Eloquent\PersonalAccess;
 
-use KanekiYuto\Handy\Trace\TraceEloquent;
+use KanekiYuto\Handy\Trace\EloquentTrace;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）
  *
  * @author KanekiYuto
  */
-class TokensTrace extends TraceEloquent
+class TokensTrace extends EloquentTrace
 {
 
     /**
@@ -95,13 +95,13 @@ class TokensTrace extends TraceEloquent
      *
      * @var array<int, string>
      */
-    const HIDDEN = [];
+    const HIDDEN = [self::TOKEN];
 
     /**
      * 可填充的列
      *
      * @var array<int, string>
      */
-    const FILLABLE = [self::ID, self::TOKENABLE, self::NAME, self::TOKEN, self::ABILITIES, self::LAST_USED_AT, self::EXPIRES_AT, self::CREATED_AT, self::UPDATED_AT];
+    const FILLABLE = [self::NAME, self::TOKEN, self::ABILITIES, self::EXPIRES_AT];
 
 }

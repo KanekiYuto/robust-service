@@ -2,14 +2,14 @@
 
 namespace App\Cascade\Trace\Eloquent\Admin;
 
-use KanekiYuto\Handy\Trace\TraceEloquent;
+use KanekiYuto\Handy\Trace\EloquentTrace;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）
  *
  * @author KanekiYuto
  */
-class InfoTrace extends TraceEloquent
+class InfoTrace extends EloquentTrace
 {
 
     /**
@@ -32,49 +32,48 @@ class InfoTrace extends TraceEloquent
 	 * @var string
 	 */
 	const ID = 'id';
-	
+
 	/**
 	 * 账号
 	 *
 	 * @var string
 	 */
 	const ACCOUNT = 'account';
-	
+
 	/**
 	 * 角色ID
 	 *
 	 * @var string
 	 */
 	const ADMIN_ROLE_ID = 'admin_role_id';
-	
+
 	/**
 	 * 邮箱
 	 *
 	 * @var string
 	 */
 	const EMAIL = 'email';
-	
+
 	/**
 	 * 密码
 	 *
 	 * @var string
 	 */
 	const PASS = 'pass';
-	
+
 	/**
 	 * 创建时间
 	 *
 	 * @var string
 	 */
 	const CREATED_AT = 'created_at';
-	
+
 	/**
 	 * 修改时间
 	 *
 	 * @var string
 	 */
 	const UPDATED_AT = 'updated_at';
-	
 
     /**
      * 隐藏列
@@ -88,6 +87,6 @@ class InfoTrace extends TraceEloquent
      *
      * @var array<int, string>
      */
-    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::CREATED_AT, self::UPDATED_AT];
+    const FILLABLE = [self::ID, self::ACCOUNT, self::ADMIN_ROLE_ID, self::EMAIL, self::PASS, self::CREATED_AT, self::UPDATED_AT];
 
 }

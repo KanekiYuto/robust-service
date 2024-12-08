@@ -2,14 +2,14 @@
 
 namespace App\Cascade\Trace\Eloquent\Admin;
 
-use KanekiYuto\Handy\Trace\TraceEloquent;
+use KanekiYuto\Handy\Trace\EloquentTrace;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）
  *
  * @author KanekiYuto
  */
-class RoleTrace extends TraceEloquent
+class RoleTrace extends EloquentTrace
 {
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backstage\Admin;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rules\Password;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
@@ -22,11 +21,11 @@ class InfoController
 	/**
 	 * 獲取選項數據
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public static function select(): JsonResponse
+	public static function select(): PreacherResponse
 	{
-		return InfoService::select()->export()->json();
+		return InfoService::select();
 	}
 
 	/**
@@ -34,26 +33,24 @@ class InfoController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function paging(Request $request): JsonResponse
+	public function paging(Request $request): PreacherResponse
 	{
-		$orderBy = [
-			TheTrace::ID,
-			TheTrace::ACCOUNT,
-			TheTrace::EMAIL,
-			TheTrace::UPDATED_AT,
-			TheTrace::CREATED_AT,
-		];
-
 		return PagingQuery::request(
 			request: $request,
 			class: InfoService::class,
-			orderBy: $orderBy,
+			orderBy: [
+                TheTrace::ID,
+                TheTrace::ACCOUNT,
+                TheTrace::EMAIL,
+                TheTrace::UPDATED_AT,
+                TheTrace::CREATED_AT,
+            ],
 			queryRule: [
 				'id' => ['nullable', 'string'],
 			]
-		)->export()->json();
+		);
 	}
 
 	/**
@@ -61,9 +58,9 @@ class InfoController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function append(Request $request): JsonResponse
+	public function append(Request $request): PreacherResponse
 	{
 		$requestParams = $request::validate([
 			'account' => ['required', 'string'],
@@ -71,7 +68,7 @@ class InfoController
 			'pass' => [
 				'required',
 				'string',
-				// 必須八位以上且帶至少一個數字且至少包含一個字母
+				// 必须八位以上且带至少一个数字且至少包含一个字母
 				Password::min(8)->numbers()->letters(),
 			],
 			'role_id' => ['required', 'integer'],
@@ -82,7 +79,7 @@ class InfoController
 			$requestParams['email'],
 			$requestParams['pass'],
 			$requestParams['role_id'],
-		)->export()->json();
+		);
 	}
 
 	/**
@@ -90,9 +87,9 @@ class InfoController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function modify(Request $request): JsonResponse
+	public function modify(Request $request): PreacherResponse
 	{
 		$requestParams = $request::validate([
 			'id' => ['required', 'integer'],
@@ -106,7 +103,7 @@ class InfoController
 			return Preacher::msgCode(
 				PreacherResponse::RESP_CODE_WARN,
 				'不允許編輯自身賬號信息'
-			)->export()->json();
+			);
 		}
 
 		return InfoService::modify(
@@ -114,7 +111,7 @@ class InfoController
 			$requestParams['account'],
 			$requestParams['email'],
 			$requestParams['role_id'],
-		)->export()->json();
+		);
 	}
 
 	/**

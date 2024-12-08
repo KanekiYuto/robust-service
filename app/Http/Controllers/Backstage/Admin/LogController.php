@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backstage\Admin;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
+use KanekiYuto\Handy\Preacher\PreacherResponse;
 use App\Http\Service\Backstage\Admin\LogService;
 use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 
@@ -21,9 +21,9 @@ class LogController
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return JsonResponse
+	 * @return PreacherResponse
 	 */
-	public function paging(Request $request): JsonResponse
+	public function paging(Request $request): PreacherResponse
 	{
 		return PagingQuery::request(
 			request: $request,
@@ -41,7 +41,7 @@ class LogController
 				'updated_at' => ['nullable', 'string'],
 				'created_at' => ['nullable', 'string'],
 			]
-		)->export()->json();
+		);
 	}
 
 }

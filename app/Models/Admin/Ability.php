@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin;
 
-use App\Models\BaseModel as Model;
+use Illuminate\Database\Eloquent\Model as Model;
 
 class Ability extends Model
 {
