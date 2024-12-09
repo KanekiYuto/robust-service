@@ -7,7 +7,7 @@ use KanekiYuto\Handy\Trace\EloquentTrace;
 use KanekiYuto\Handy\Activity\Eloquent\Activity as EloquentActivity;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheEloquentTrace;
 use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as TheActivity;
-use Illuminate\Database\Eloquent\Model as Model;
+use App\Models\Admin\Role as Model;
 
 use KanekiYuto\Handy\Foundation\Database\Eloquent\Casts\AutoTimezone;
 
@@ -96,7 +96,6 @@ class RoleModel extends Model
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-			TheEloquentTrace::ABILITIES => 'json',
 			TheEloquentTrace::CREATED_AT => AutoTimezone::class,
 			TheEloquentTrace::UPDATED_AT => AutoTimezone::class,
 		]);

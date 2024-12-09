@@ -5,11 +5,11 @@ namespace App\Models\Admin;
 use Laravel\Sanctum\HasApiTokens;
 use App\Cascade\Models\Admin\RoleModel;
 use Illuminate\Notifications\Notifiable;
-use App\Cascade\Trace\Eloquent\Admin\InfoTrace;
+use Illuminate\Foundation\Auth\User as Model;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Model;
 
 class Info extends Model
 {
@@ -18,9 +18,7 @@ class Info extends Model
 
     public function casts(): array
     {
-        return [
-            RoleTrace::ABILITIES => 'json',
-        ];
+        return [];
     }
 
     /**

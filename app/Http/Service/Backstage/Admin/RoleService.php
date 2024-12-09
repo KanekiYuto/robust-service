@@ -75,6 +75,8 @@ class RoleService
 	/**
 	 * 新增管理员角色信息
 	 *
+     * @todo 需要更改
+     *
 	 * @param  string  $name
 	 * @param  string  $explain
 	 *
@@ -87,7 +89,6 @@ class RoleService
 		$model = $model->create([
 			TheTrace::NAME => $name,
 			TheTrace::EXPLAIN => $explain,
-			TheTrace::ABILITIES => [],
 		]);
 
 		return Preacher::allow(
@@ -136,18 +137,14 @@ class RoleService
 	 *
 	 * @param  int    $id
 	 * @param  array  $abilities
+     * @todo 需要更改
 	 *
 	 * @return PreacherResponse
 	 */
 	public static function ability(int $id, array $abilities): PreacherResponse
 	{
-		$model = AdminRole::query()->find($id);
-
-		$column = TheTrace::ABILITIES;
-		$model->$column = $abilities;
-
 		return Preacher::allow(
-			$model->save(),
+			true,
 			Preacher::msg('修改成功'),
 			Preacher::msgCode(
 				PreacherResponse::RESP_CODE_FAIL,

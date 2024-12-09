@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use App\Cascade\Models\Admin\InfoModel;
-use App\Cascade\Models\Admin\AbilityModel;
+use App\Cascade\Models\Admin\RoleModel;
 use KanekiYuto\Handy\Support\Facades\Preacher;
 use KanekiYuto\Handy\Preacher\PreacherResponse;
+use App\Cascade\Trace\Eloquent\Admin\RoleTrace;
 use App\Cascade\Trace\Eloquent\Admin\AbilityTrace;
 use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace as AdminInfoTrace;
@@ -89,12 +90,7 @@ class AdminService
      */
     public static function token(object $model, int $validity): PreacherResponse
     {
-        // 获取模型能力
-        $abilityColumn = AdminRoleTrace::ABILITIES;
-        $roleInfo = $model->role;
-        $ability = empty($roleInfo) ? [] : $roleInfo->$abilityColumn;
-
-        [$tokenId, $tokenBody] = TokenHelpers::issue($model, $ability, $validity);
+        [$tokenId, $tokenBody] = TokenHelpers::issue($model, [], $validity);
 
         return Preacher::receipt((object) [
             'tokenId' => $tokenId,
@@ -126,19 +122,33 @@ class AdminService
         );
 
         $roleInfo = $user->role();
-        $permissions = $roleInfo->value(AdminRoleTrace::ABILITIES);
-        $ability = AbilityModel::query()
-            ->whereIn(AbilityTrace::CURRENT_UUID, $permissions)
-            ->get([AbilityTrace::CLIENT_ROUTING, AbilityTrace::OPERATION])
-            ->toArray();
+        $roleModel = RoleModel::query()->find($roleInfo->value(RoleTrace::ID));
+        $abilities = $roleModel->abilities()->get([
+            AbilityTrace::CLIENT_ROUTING,
+            AbilityTrace::OPERATION,
+            AbilityTrace::TYPE,
+        ]);
+
+        $permissions = [];
+
+        foreach ($abilities as $ability) {
+            if (!empty($ability[AbilityTrace::CLIENT_ROUTING])) {
+                $permissions[] = "@route:{$ability[AbilityTrace::CLIENT_ROUTING]}";
+            }
+
+            if (!empty($ability[AbilityTrace::OPERATION])) {
+                foreach ($ability[AbilityTrace::OPERATION] as $key => $val) {
+                    $permissions[] = "@$val:$key";
+                }
+            }
+        }
 
         return Preacher::receipt((object) [
             'id' => $user[AdminInfoTrace::ID],
             'account' => $user[AdminInfoTrace::ACCOUNT],
             'email' => $user[AdminInfoTrace::EMAIL],
             'role' => $roleInfo->value(AdminRoleTrace::NAME),
-            'permissions' => $roleInfo->value(AdminRoleTrace::ABILITIES),
-            'ability' => $ability,
+            'permissions' => $permissions,
             'token' => $token->getReceipt(),
         ]);
     }

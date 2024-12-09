@@ -48,13 +48,6 @@ class RoleTrace extends EloquentTrace
 	const EXPLAIN = 'explain';
 	
 	/**
-	 * 管理员角色能力
-	 *
-	 * @var string
-	 */
-	const ABILITIES = 'abilities';
-	
-	/**
 	 * 创建时间
 	 *
 	 * @var string
@@ -81,6 +74,6 @@ class RoleTrace extends EloquentTrace
      *
      * @var array<int, string>
      */
-    const FILLABLE = [self::ID, self::NAME, self::EXPLAIN, self::ABILITIES, self::CREATED_AT, self::UPDATED_AT];
+    const FILLABLE = [self::ID, self::NAME, self::EXPLAIN, self::CREATED_AT, self::UPDATED_AT];
 
 }

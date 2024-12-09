@@ -23,7 +23,6 @@ return new class extends Migration {
             $table->bigInteger(column: TheTrace::ID)->primary()->unique()->comment(comment: '管理员角色ID');
 			$table->string(column: TheTrace::NAME, length: 32)->comment(comment: '管理员角色名称');
 			$table->string(column: TheTrace::EXPLAIN, length: 64)->nullable()->comment(comment: '管理员角色说明');
-			$table->json(column: TheTrace::ABILITIES)->comment(comment: '管理员角色能力');
 			$table->bigInteger(column: TheTrace::CREATED_AT)->comment(comment: '创建时间');
 			$table->bigInteger(column: TheTrace::UPDATED_AT)->comment(comment: '修改时间');
         });
