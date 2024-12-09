@@ -2,7 +2,10 @@
 
 namespace App\Watchers;
 
+use Illuminate\Routing\Route;
 use App\Constants\BackstageConstant;
+use App\Cascade\Models\Admin\InfoModel;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace;
 use Illuminate\Contracts\Foundation\Application;
 use App\Cascade\Models\Admin\LogModel as AdminLog;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -11,65 +14,67 @@ use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheTrace;
 /**
  * 请求监视器
  *
- * @todo 可能需要重新写该类
- *
  * @author KanekiYuto
  */
 class RequestWatcher extends Watcher
 {
 
-	/**
-	 * Register the watcher.
-	 *
-	 * @param  Application  $app
-	 *
-	 * @return void
-	 */
-	public function register(Application $app): void
-	{
-		$app['events']->listen(RequestHandled::class, [$this, 'recordRequest']);
-	}
+    /**
+     * Register the watcher.
+     *
+     * @param  Application  $app
+     *
+     * @return void
+     */
+    public function register(Application $app): void
+    {
+        $app['events']->listen(RequestHandled::class, [$this, 'recordRequest']);
+    }
 
-	/**
-	 * Record an incoming HTTP request.
-	 *
-	 * @param  RequestHandled  $event
-	 *
-	 * @return void
-	 */
-	public function recordRequest(RequestHandled $event): void
-	{
-		$request = $event->request;
+    /**
+     * Record an incoming HTTP request.
+     *
+     * @param  RequestHandled  $event
+     *
+     * @return void
+     */
+    public function recordRequest(RequestHandled $event): void
+    {
+        $request = $event->request;
 
-		// 仅记录 [POST] 请求
-		// 排除请求方法
-		if ($request->method() !== 'POST') {
-			return;
-		}
+        // 仅记录 [POST] 请求
+        if ($request->method() !== 'POST') {
+            return;
+        }
 
-		// 排除非 [Guard] 路由
-		$admin = $request->user(BackstageConstant::GUARD);
-		if (empty($admin)) {
-			return;
-		}
+        // 排除非 [Guard] 路由
+        $user = $request->user(BackstageConstant::GUARD);
 
-		$route = $request->route();
-		$routeName = optional($route)->getName();
-		if (empty($routeName)) {
-			return;
-		}
+        if (!($user instanceof InfoModel)) {
+            return;
+        }
 
-		$response = $event->response;
+        $userArray = $user->toArray();
+        $route = $request->route();
 
-		$model = AdminLog::query();
-		$model->create([
-			TheTrace::ADMIN_ID => optional($admin)->id,
-			TheTrace::API => $routeName,
-			TheTrace::IPADDRESS => $request->ip(),
-			TheTrace::PAYLOAD => $request->input(),
-			TheTrace::HEADERS => $request->headers->all(),
-			TheTrace::RESPONSE => json_decode($response->getContent(), true),
-		])->save();
-	}
+        if (!($route instanceof Route)) {
+            return;
+        }
+
+        $routeName = $route->getName();
+
+        if (empty($routeName)) {
+            return;
+        }
+
+        AdminLog::query()->create([
+            TheTrace::ADMIN_ID => $userArray[InfoTrace::ID],
+            TheTrace::API => $routeName,
+            TheTrace::IPADDRESS => $request->ip(),
+            TheTrace::PAYLOAD => $request->input(),
+            TheTrace::HEADERS => $request->headers->all(),
+            TheTrace::RESPONSE => $event->response,
+        ])->save();
+    }
 
 }

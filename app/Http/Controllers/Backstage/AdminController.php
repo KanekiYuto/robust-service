@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backstage;
 use App\Constants\BackstageConstant;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
+use App\Cascade\Models\Admin\InfoModel;
+use Illuminate\Database\Eloquent\Model;
 use App\Http\Service\Backstage\AdminService;
 use KanekiYuto\Handy\Support\Facades\Preacher;
 use KanekiYuto\Handy\Preacher\PreacherResponse;
@@ -44,9 +46,25 @@ class AdminController
      */
     public function logout(Request $request): PreacherResponse
     {
-        $admin = $request::user(BackstageConstant::GUARD);
+        $user = $request::user(BackstageConstant::GUARD);
 
-        $admin->currentAccessToken()->delete();
+        if (!($user instanceof InfoModel)) {
+            return Preacher::msgCode(
+                PreacherResponse::RESP_CODE_FAIL,
+                '系统异常'
+            );
+        }
+
+        $currentAccessToken = $user->currentAccessToken();
+
+        if (!($currentAccessToken instanceof Model)) {
+            return Preacher::msgCode(
+                PreacherResponse::RESP_CODE_FAIL,
+                '系统异常'
+            );
+        }
+
+        $currentAccessToken->delete();
 
         return Preacher::msg('退出登录成功');
     }

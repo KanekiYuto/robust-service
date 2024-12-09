@@ -32,48 +32,49 @@ class InfoTrace extends EloquentTrace
 	 * @var string
 	 */
 	const ID = 'id';
-
+	
 	/**
 	 * 账号
 	 *
 	 * @var string
 	 */
 	const ACCOUNT = 'account';
-
+	
 	/**
 	 * 角色ID
 	 *
 	 * @var string
 	 */
 	const ADMIN_ROLE_ID = 'admin_role_id';
-
+	
 	/**
 	 * 邮箱
 	 *
 	 * @var string
 	 */
 	const EMAIL = 'email';
-
+	
 	/**
 	 * 密码
 	 *
 	 * @var string
 	 */
 	const PASS = 'pass';
-
+	
 	/**
 	 * 创建时间
 	 *
 	 * @var string
 	 */
 	const CREATED_AT = 'created_at';
-
+	
 	/**
 	 * 修改时间
 	 *
 	 * @var string
 	 */
 	const UPDATED_AT = 'updated_at';
+	
 
     /**
      * 隐藏列

@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 /**
- * 初始化时的数据填充
+ * 管理员数据填充
  *
  * @author KanekiYuto
  */
-class DatabaseSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
 
     /**
@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->callOnce([
-            AdminSeeder::class
+            AdminAbilitySeeder::class,
         ]);
     }
 

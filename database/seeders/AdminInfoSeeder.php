@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Cascade\Models\Admin\InfoModel as AdminInfo;
-use App\Cascade\Trace\Eloquent\Admin\InfoTrace AS TheTrace;
-
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
+use App\Cascade\Models\Admin\InfoModel as AdminInfo;
+use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 
 /**
  * 管理员数据填充
@@ -30,14 +29,14 @@ class AdminInfoSeeder extends Seeder
             TheTrace::ACCOUNT => 'phpunit@master',
             TheTrace::PASS => Hash::make('phpunit@pass'),
             TheTrace::EMAIL => 'phpunit-master@rubust.com',
-            TheTrace::ADMIN_ROLE_ID => $roleId
+            TheTrace::ADMIN_ROLE_ID => $roleId,
         ])->save();
 
         AdminInfo::query()->create([
             TheTrace::ACCOUNT => 'KanekiYuto',
             TheTrace::PASS => Hash::make('KanekiYuto@pass'),
             TheTrace::EMAIL => 'kaneki.yuto.404@gmail.com',
-            TheTrace::ADMIN_ROLE_ID => $roleId
+            TheTrace::ADMIN_ROLE_ID => $roleId,
         ])->save();
     }
 

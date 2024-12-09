@@ -9,7 +9,7 @@ use App\Cascade\Trace\Eloquent\Admin\AbilityTrace as TheEloquentTrace;
 use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as TheActivity;
 use Illuminate\Database\Eloquent\Model as Model;
 
-use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
+use KanekiYuto\Handy\Foundation\Database\Eloquent\Casts\AutoTimezone;
 
 /**
  * 
@@ -97,7 +97,6 @@ class AbilityModel extends Model
     {
         return array_merge(parent::casts(), [
 			TheEloquentTrace::SERVER_ROUTING => 'json',
-			TheEloquentTrace::CLIENT_ROUTING => 'json',
 			TheEloquentTrace::OPERATION => 'json',
 			TheEloquentTrace::CREATED_AT => AutoTimezone::class,
 			TheEloquentTrace::UPDATED_AT => AutoTimezone::class,

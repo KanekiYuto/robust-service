@@ -21,7 +21,7 @@ return new class extends Migration {
     {
         Schema::create(TheTrace::TABLE, function (Blueprint $table) {
             $table->bigInteger(column: TheTrace::ID)->comment(comment: '私人访问令牌ID');
-			$table->morphs(name: TheTrace::TOKENABLE)->comment(comment: '令牌能力');
+			$table->morphs(name: TheTrace::TOKENABLE);
 			$table->string(column: TheTrace::NAME)->comment(comment: '令牌名称');
 			$table->string(column: TheTrace::TOKEN, length: 64)->unique()->comment(comment: '令牌内容');
 			$table->text(column: TheTrace::ABILITIES)->nullable()->comment(comment: '令牌能力');

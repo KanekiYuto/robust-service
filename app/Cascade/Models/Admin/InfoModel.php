@@ -9,7 +9,7 @@ use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheEloquentTrace;
 use App\Activity\Eloquent\Admin\Info as TheActivity;
 use App\Models\Admin\Info as Model;
 
-use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
+use KanekiYuto\Handy\Foundation\Database\Eloquent\Casts\AutoTimezone;
 
 /**
  * 

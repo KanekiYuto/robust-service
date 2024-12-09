@@ -26,9 +26,9 @@ return new class extends Migration {
 			$table->uuid(column: TheTrace::CURRENT_UUID)->comment(comment: '唯一标识');
 			$table->uuid(column: TheTrace::PARENT_UUID)->comment(comment: '父级唯一标识');
 			$table->json(column: TheTrace::SERVER_ROUTING)->comment(comment: '服务端路由');
-			$table->json(column: TheTrace::CLIENT_ROUTING)->comment(comment: '客户端路由');
+			$table->string(column: TheTrace::CLIENT_ROUTING, length: 128)->comment(comment: '客户端路由');
 			$table->json(column: TheTrace::OPERATION)->comment(comment: '允许操作的权限');
-			$table->enum(column: TheTrace::TYPE, allowed: ['group', 'ability'])->comment(comment: '能力类型');
+			$table->enum(column: TheTrace::TYPE, allowed: ['group', 'menu', 'ability'])->comment(comment: '能力类型');
 			$table->bigInteger(column: TheTrace::CREATED_AT)->comment(comment: '创建时间');
 			$table->bigInteger(column: TheTrace::UPDATED_AT)->comment(comment: '修改时间');
         });

@@ -3,7 +3,7 @@
 use App\Models\Admin\Log as Model;
 use KanekiYuto\Handy\Cascade\Cascade;
 use KanekiYuto\Handy\Cascade\Blueprint;
-use KanekiYuto\Handy\Foundation\Cast\AutoTimezone;
+use KanekiYuto\Handy\Foundation\Database\Eloquent\Casts\AutoTimezone;
 use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as EloquentActivity;
 
 return Cascade::configure()->withTable(
