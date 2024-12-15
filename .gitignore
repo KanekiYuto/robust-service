@@ -22,3 +22,5 @@ yarn-error.log
 *.idea
 qodana.yaml
 composer.lock
+
+packages

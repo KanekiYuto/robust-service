@@ -9,7 +9,7 @@ use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheEloquentTrace;
 use App\Hook\Eloquent\Admin\Info as TheHook;
 use App\Models\Admin\Info as Model;
 
-use Handyfit\Framework\Foundation\Database\Eloquent\Casts\AutoTimezone;
+
 
 /**
  * 
@@ -95,10 +95,7 @@ class InfoModel extends Model
      */
     public function casts(): array
     {
-        return array_merge(parent::casts(), [
-			TheEloquentTrace::CREATED_AT => AutoTimezone::class,
-			TheEloquentTrace::UPDATED_AT => AutoTimezone::class,
-		]);
+        return array_merge(parent::casts(), []);
     }
 
     /**

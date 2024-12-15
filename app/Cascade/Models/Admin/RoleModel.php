@@ -4,12 +4,12 @@ namespace App\Cascade\Models\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use Handyfit\Framework\Trace\EloquentTrace;
-use Handyfit\Framework\Hook\Eloquent as EloquentHook;
+use Handyfit\Framework\Hook\Eloquent as Hook;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheEloquentTrace;
-use Handyfit\Framework\Foundation\Hook\Eloquent as TheEloquentHook;
+use Handyfit\Framework\Foundation\Hook\Eloquent as TheHook;
 use App\Models\Admin\Role as Model;
 
-use Handyfit\Framework\Foundation\Database\Eloquent\Casts\AutoTimezone;
+
 
 /**
  * 
@@ -20,89 +20,86 @@ class RoleModel extends Model
 {
 
     /**
-     * [Eloquent] 模型追踪类
+     * Eloquent model tracing class
      *
      * @var EloquentTrace
      */
     protected EloquentTrace $eloquentTrace;
 
     /**
-     * 模型钩子
+     * Hook class
      *
-     * @var EloquentHook
+     * @var Hook
      */
-    protected EloquentHook $eloquentHook;
+    protected Hook $hook;
 
     /**
-     * 模型表名称
+     * Table name
      *
      * @var string
      */
     protected $table = TheEloquentTrace::TABLE;
 
     /**
-     * 模型主键 - [ID]
+     * Primary key
      *
      * @var string
      */
     protected $primaryKey = TheEloquentTrace::PRIMARY_KEY;
 
     /**
-     * 主键是否自增
+     * The primary key increases automatically
      *
      * @var bool
      */
     public $incrementing = false;
 
     /**
-     * 指示模型是否主动维护时间戳
+     * Indicates whether the model actively maintains a timestamp
      *
      * @var bool
      */
     public $timestamps = false;
 
     /**
-     * 需要被隐藏的列属性
+     * Column properties that need to be hidden
      *
      * @var array<int, string>
      */
     protected $hidden = TheEloquentTrace::HIDDEN;
 
     /**
-     * 可大量分配的属性
+     * Attributes that can be filled
      *
      * @var array<string>
      */
     protected $fillable = TheEloquentTrace::FILLABLE;
 
     /**
-     * 创建一个 [Eloquent] 模型实例
+     * Create an Eloquent model instance
      *
      * @return void
      */
     public function __construct()
     {
         $this->eloquentTrace = new TheEloquentTrace();
-        $this->eloquentHook = new TheEloquentHook();
+        $this->hook = new TheHook();
 
         parent::__construct();
     }
 
     /**
-     * 获取应该强制转换的属性
+     * Gets the property that should be cast
      *
      * @return array
      */
     public function casts(): array
     {
-        return array_merge(parent::casts(), [
-			TheEloquentTrace::CREATED_AT => AutoTimezone::class,
-			TheEloquentTrace::UPDATED_AT => AutoTimezone::class,
-		]);
+        return array_merge(parent::casts(), []);
     }
 
     /**
-     * 创建前执行的操作
+     * Operations performed before creation
      *
      * @param  Builder  $query
      *
@@ -110,7 +107,7 @@ class RoleModel extends Model
      */
     protected function performInsert(Builder $query): bool
     {
-        if (!$this->eloquentHook->performInsert($this, $query, $this->eloquentTrace)) {
+        if (!$this->hook->performInsert($this, $query, $this->eloquentTrace)) {
             return false;
         }
 
@@ -118,7 +115,7 @@ class RoleModel extends Model
     }
 
     /**
-     * 执行一个模型更新操作
+     * The operation performed before the update
      *
      * @param  Builder  $query
      *
@@ -126,7 +123,7 @@ class RoleModel extends Model
      */
     protected function performUpdate(Builder $query): bool
     {
-        if (!$this->eloquentHook->performUpdate($this, $query, $this->eloquentTrace)) {
+        if (!$this->hook->performUpdate($this, $query, $this->eloquentTrace)) {
             return false;
         }
 
