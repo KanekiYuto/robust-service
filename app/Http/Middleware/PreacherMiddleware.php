@@ -6,9 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteAction;
-use KanekiYuto\Handy\Preacher\Export;
+use Handyfit\Framework\Preacher\Export;
 use Symfony\Component\HttpFoundation\Response;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use Laravel\SerializableClosure\SerializableClosure;
 
 class PreacherMiddleware

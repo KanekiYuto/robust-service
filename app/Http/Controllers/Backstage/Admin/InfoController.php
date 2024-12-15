@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backstage\Admin;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rules\Password;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Http\Service\Backstage\Admin\InfoService;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 

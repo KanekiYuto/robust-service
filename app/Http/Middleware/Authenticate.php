@@ -5,8 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 /**

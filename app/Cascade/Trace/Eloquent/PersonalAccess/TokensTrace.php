@@ -2,7 +2,7 @@
 
 namespace App\Cascade\Trace\Eloquent\PersonalAccess;
 
-use KanekiYuto\Handy\Trace\EloquentTrace;
+use Handyfit\Framework\Trace\EloquentTrace;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）
@@ -34,7 +34,7 @@ class TokensTrace extends EloquentTrace
 	const ID = 'id';
 	
 	/**
-	 * 令牌能力
+	 * 
 	 *
 	 * @var string
 	 */

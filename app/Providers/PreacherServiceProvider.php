@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use KanekiYuto\Handy\Support\Facades\Preacher;
+use Handyfit\Framework\Support\Facades\Preacher;
 
 /**
  * [Preacher] 服务提供者
@@ -21,7 +21,7 @@ class PreacherServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 		// 实现国际化语言服务
-		Preacher::useMessageActivity(function (string $message) {
+		Preacher::useMsgHook(function (string $message) {
 			$message = __("message.$message");
 			return str_replace('message.', '', $message);
 		});

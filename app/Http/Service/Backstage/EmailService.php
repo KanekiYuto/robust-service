@@ -5,8 +5,8 @@ namespace App\Http\Service\Backstage;
 use App\Mail\IdentifyingCode;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 
 /**
  * 验证码服务类

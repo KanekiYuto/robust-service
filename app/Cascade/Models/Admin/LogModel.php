@@ -3,13 +3,13 @@
 namespace App\Cascade\Models\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
-use KanekiYuto\Handy\Trace\EloquentTrace;
-use KanekiYuto\Handy\Activity\Eloquent\Activity as EloquentActivity;
+use Handyfit\Framework\Trace\EloquentTrace;
+use Handyfit\Framework\Hook\Eloquent as EloquentHook;
 use App\Cascade\Trace\Eloquent\Admin\LogTrace as TheEloquentTrace;
-use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as TheActivity;
+use Handyfit\Framework\Foundation\Hook\Eloquent as TheEloquentHook;
 use App\Models\Admin\Log as Model;
 
-use KanekiYuto\Handy\Foundation\Database\Eloquent\Casts\AutoTimezone;
+use Handyfit\Framework\Foundation\Database\Eloquent\Casts\AutoTimezone;
 
 /**
  * 
@@ -27,11 +27,11 @@ class LogModel extends Model
     protected EloquentTrace $eloquentTrace;
 
     /**
-     * 模型生命周期
+     * 模型钩子
      *
-     * @var EloquentActivity
+     * @var EloquentHook
      */
-    protected EloquentActivity $modelActivity;
+    protected EloquentHook $eloquentHook;
 
     /**
      * 模型表名称
@@ -83,7 +83,7 @@ class LogModel extends Model
     public function __construct()
     {
         $this->eloquentTrace = new TheEloquentTrace();
-        $this->modelActivity = new TheActivity();
+        $this->eloquentHook = new TheEloquentHook();
 
         parent::__construct();
     }
@@ -113,7 +113,7 @@ class LogModel extends Model
      */
     protected function performInsert(Builder $query): bool
     {
-        if (!$this->modelActivity->performInsert($this, $query, $this->eloquentTrace)) {
+        if (!$this->eloquentHook->performInsert($this, $query, $this->eloquentTrace)) {
             return false;
         }
 
@@ -129,7 +129,7 @@ class LogModel extends Model
      */
     protected function performUpdate(Builder $query): bool
     {
-        if (!$this->modelActivity->performUpdate($this, $query, $this->eloquentTrace)) {
+        if (!$this->eloquentHook->performUpdate($this, $query, $this->eloquentTrace)) {
             return false;
         }
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Activity\Eloquent\Admin;
+namespace App\Hook\Eloquent\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use KanekiYuto\Handy\Trace\EloquentTrace;
+use Handyfit\Framework\Trace\EloquentTrace;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace;
-use KanekiYuto\Handy\Foundation\Activity\Eloquent\Activity as EloquentActivity;
+use Handyfit\Framework\Foundation\Hook\Eloquent as EloquentHook;
 
 /**
  * 管理员信息
  *
  * @author KanekiYuto
  */
-class Info extends EloquentActivity
+class Info extends EloquentHook
 {
 
     /**

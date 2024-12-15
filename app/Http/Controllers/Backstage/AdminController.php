@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Request;
 use App\Cascade\Models\Admin\InfoModel;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Service\Backstage\AdminService;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 
 /**

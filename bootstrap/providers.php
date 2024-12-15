@@ -1,6 +1,6 @@
 <?php
 
-use KanekiYuto\Handy\HandyServiceProvider;
+use Handyfit\Framework\HandyServiceProvider;
 
 return [
     App\Providers\AppServiceProvider::class,

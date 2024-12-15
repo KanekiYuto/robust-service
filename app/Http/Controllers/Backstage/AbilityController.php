@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backstage;
 
 use App\Ability\Ability;
 use Illuminate\Support\Facades\Request;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 
 /**
  * 能力控制器
@@ -27,6 +27,8 @@ class AbilityController
 		$requestParams = $request::validate([
 			'rely' => ['required', 'string'],
 		]);
+
+        Preacher::base();
 
 		return Preacher::rows(Ability::abilities($requestParams['rely']));
 	}

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backstage\Admin;
 
 use Illuminate\Support\Facades\Request;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Http\Service\Backstage\Admin\RoleService;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace as TheTrace;
 

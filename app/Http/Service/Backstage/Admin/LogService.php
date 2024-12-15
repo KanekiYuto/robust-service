@@ -5,7 +5,7 @@ namespace App\Http\Service\Backstage\Admin;
 use Kaneki\Diverse\Equation\Equation;
 use Kaneki\Diverse\Equation\Formulas;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Cascade\Models\Admin\LogModel as AdminLog;
 
 /**

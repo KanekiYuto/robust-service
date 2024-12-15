@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 use App\Constants\BackstageConstant;
 use App\Cascade\Models\Admin\InfoModel;
 use App\Cascade\Models\Admin\RoleModel;
-use App\Cascade\Models\Admin\AbilityModel;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Cascade\Trace\Eloquent\Admin\RoleTrace;
 use App\Cascade\Trace\Eloquent\Admin\AbilityTrace;
-use App\Cascade\Trace\Eloquent\Admin\RoleTrace as AdminRoleTrace;
 
 /**
  * 后台能力验证中间件

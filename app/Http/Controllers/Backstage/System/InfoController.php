@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backstage\System;
 
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 
 /**
  * 系統信息

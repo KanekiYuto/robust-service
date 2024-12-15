@@ -2,7 +2,7 @@
 
 namespace App\Cascade\Trace\Eloquent\Admin;
 
-use KanekiYuto\Handy\Trace\EloquentTrace;
+use Handyfit\Framework\Trace\EloquentTrace;
 
 /**
  * 追踪类 （帮助 IDE 更好地发现）

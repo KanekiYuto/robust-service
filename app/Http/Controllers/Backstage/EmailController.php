@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backstage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Request;
 use App\Http\Service\Backstage\EmailService;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Preacher\PreacherResponse;
 
 /**
  * 邮箱控制器

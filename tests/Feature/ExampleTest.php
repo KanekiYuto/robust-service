@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Testing\Fluent\AssertableJson;
-use KanekiYuto\Handy\Preacher\PreacherResponse as PResponse;
+use Handyfit\Framework\Preacher\PreacherResponse as PResponse;
 
 describe('管理员相关', function () {
 

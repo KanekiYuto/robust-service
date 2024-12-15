@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Kaneki\Diverse\Equation\Equation;
 use Kaneki\Diverse\Equation\Formulas;
 use Kaneki\Diverse\PagingQuery\PagingQuery;
-use KanekiYuto\Handy\Support\Facades\Preacher;
-use KanekiYuto\Handy\Preacher\PreacherResponse;
+use Handyfit\Framework\Support\Facades\Preacher;
+use Handyfit\Framework\Preacher\PreacherResponse;
 use App\Cascade\Models\Admin\InfoModel as AdminInfo;
 use App\Cascade\Trace\Eloquent\Admin\InfoTrace as TheTrace;
 
